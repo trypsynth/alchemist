@@ -1650,6 +1650,7 @@ const resultText = document.getElementById("result-text");
 const totalCount = document.getElementById("total-count");
 const copySaveButton = document.getElementById("copy-save-button");
 const importSaveButton = document.getElementById("import-save-button");
+const clearSaveButton = document.getElementById("clear-save-button");
 const saveDataInput = document.getElementById("save-data-input");
 const SAVE_KEY = "alchemist-save-v1";
 const SAVE_INTERVAL_MS = 2000;
@@ -1824,6 +1825,18 @@ function importSaveData() {
 	}
 }
 
+function clearSaveData() {
+	unlocked.clear();
+	for (const base of DATA.baseElements) {
+		unlocked.add(toCanonicalName(base));
+	}
+	saveDataInput.value = "";
+	localStorage.removeItem(SAVE_KEY);
+	populateElementOptions();
+	renderInventory();
+	resultText.textContent = "save data cleared.";
+}
+
 loadGame();
 populateElementOptions();
 renderInventory();
@@ -1842,4 +1855,8 @@ copySaveButton.addEventListener("click", () => {
 
 importSaveButton.addEventListener("click", () => {
 	importSaveData();
+});
+
+clearSaveButton.addEventListener("click", () => {
+	clearSaveData();
 });
