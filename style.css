@@ -1,0 +1,108 @@
+:root {
+	--bg: #f7f4eb;
+	--panel: #ffffff;
+	--text: #1d1d1d;
+	--border: #d5d0c3;
+	--accent: #1f5f57;
+	--accent-strong: #174b45;
+	--focus: #8a2e00;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 1rem;
+	font-family: Verdana, Tahoma, sans-serif;
+	background: var(--bg);
+	color: var(--text);
+}
+
+h1 {
+	margin: 0 0 0.5rem;
+}
+
+h2 {
+	margin: 0 0 0.5rem;
+	font-size: 1.05rem;
+}
+
+p {
+	margin: 0 0 0.75rem;
+}
+
+.controls {
+	display: grid;
+	gap: 0.7rem;
+	margin-bottom: 1rem;
+}
+
+.options {
+	padding-top: 0.75rem;
+	border-top: 1px solid var(--border);
+	display: grid;
+	gap: 0.5rem;
+}
+
+.field {
+	display: grid;
+	gap: 0.3rem;
+}
+
+label {
+	font-weight: 700;
+}
+
+select,
+textarea,
+button {
+	font: inherit;
+	padding: 0.5rem;
+	border: 1px solid #797979;
+	border-radius: 0.3rem;
+	background: #ffffff;
+	color: var(--text);
+}
+
+textarea {
+	width: 100%;
+	resize: vertical;
+	min-height: 5rem;
+}
+
+button {
+	cursor: pointer;
+	background: var(--accent);
+	color: #ffffff;
+	border-color: var(--accent-strong);
+}
+
+button:hover,
+button:focus-visible {
+	background: var(--accent-strong);
+}
+
+.option-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+:focus-visible {
+	outline: 3px solid var(--focus);
+	outline-offset: 1px;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}

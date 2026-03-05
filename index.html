@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>alchemist</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+	<h1>Alchemist</h1>
+	<p id="total-count">Unlocked: 4</p>
+	<form id="combine-form" class="controls">
+		<div class="field">
+			<label for="first-element">First element</label>
+			<select id="first-element" name="first-element"></select>
+		</div>
+		<div class="field">
+			<label for="second-element">Second element</label>
+			<select id="second-element" name="second-element"></select>
+		</div>
+		<button id="combine-button" type="submit">Combine</button>
+	</form>
+	<section class="options">
+		<h2>Options</h2>
+		<label for="save-data-input">Save data</label>
+		<textarea id="save-data-input" rows="4"></textarea>
+		<div class="option-actions">
+			<button id="copy-save-button" type="button">Copy</button>
+			<button id="import-save-button" type="button">Import</button>
+		</div>
+	</section>
+	<p id="result-text" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+
+	<script src="game.js"></script>
+</body>
+</html>
