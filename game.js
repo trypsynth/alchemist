@@ -1852,6 +1852,17 @@ form.addEventListener("submit", (event) => {
 	combineSelectedElements();
 });
 
+function handleSelectEnterKey(event) {
+	if (event.key !== "Enter") {
+		return;
+	}
+	event.preventDefault();
+	combineSelectedElements();
+}
+
+firstSelect.addEventListener("keydown", handleSelectEnterKey);
+secondSelect.addEventListener("keydown", handleSelectEnterKey);
+
 copySaveButton.addEventListener("click", () => {
 	copySaveDataToClipboard();
 });
