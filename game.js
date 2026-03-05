@@ -1718,7 +1718,10 @@ function combineSelectedElements() {
 }
 
 function renderInventory() {
-	totalCount.textContent = `Unlocked: ${unlocked.size}`;
+	const total = DATA.elements.length;
+	const count = unlocked.size;
+	const percent = total === 0 ? 0 : (count / total) * 100;
+	totalCount.textContent = `${count}/${total} elements unlocked (${percent.toFixed(1)}%)`;
 }
 
 function getSavePayload() {
