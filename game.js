@@ -1706,15 +1706,21 @@ function combineSelectedElements() {
 		resultText.textContent = `No recipe for ${first} + ${second}.`;
 		return;
 	}
-	const nextResult = results.find((item) => !unlocked.has(item));
-	if (!nextResult) {
-		resultText.textContent = `already unlocked ${results[0]}.`;
+	const newlyUnlocked = [];
+	for (const result of results) {
+		if (unlocked.has(result)) {
+			continue;
+		}
+		unlocked.add(result);
+		newlyUnlocked.push(result);
+	}
+	if (newlyUnlocked.length === 0) {
+		resultText.textContent = `already unlocked ${results.join(", ")}.`;
 		return;
 	}
-	unlocked.add(nextResult);
 	populateElementOptions();
 	renderInventory();
-	resultText.textContent = `Unlocked ${nextResult}!`;
+	resultText.textContent = `Unlocked ${newlyUnlocked.join(", ")}!`;
 }
 
 function renderInventory() {
