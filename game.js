@@ -2466,7 +2466,7 @@ for (const element of DATA.elements) {
 
 const activeElementSet = new Set(DATA.elements.map((name) => toCanonicalName(name)));
 let recipeIndex = new Map();
-const unlocked = new Set(activeElementSet);
+const unlocked = new Set(DATA.baseElements.map((name) => toCanonicalName(name)));
 
 function toCanonicalName(name) {
 	const normalized = String(name).toLowerCase();
@@ -2599,8 +2599,8 @@ function applyUnlockedNames(names) {
 		}
 	}
 	if (unlocked.size === 0) {
-		for (const element of activeElementSet) {
-			unlocked.add(element);
+		for (const element of DATA.baseElements) {
+			unlocked.add(toCanonicalName(element));
 		}
 	}
 	return true;
@@ -2707,8 +2707,8 @@ function importSaveData() {
 
 function clearSaveData() {
 	unlocked.clear();
-	for (const element of activeElementSet) {
-		unlocked.add(element);
+	for (const element of DATA.baseElements) {
+		unlocked.add(toCanonicalName(element));
 	}
 	saveDataInput.value = "";
 	localStorage.removeItem(SAVE_KEY);
