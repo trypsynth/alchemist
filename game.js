@@ -45,9 +45,6 @@ const DATA = {
 		"avalanche",
 		"Aviary",
 		"axe",
-		"Baast",
-		"Baba yaga",
-		"Babe the blue ox",
 		"bacon",
 		"bacteria",
 		"baker",
@@ -89,7 +86,6 @@ const DATA = {
 		"bone",
 		"bonsai tree",
 		"book",
-		"Book of the dead",
 		"Bottle",
 		"Boulder",
 		"Bow",
@@ -158,7 +154,6 @@ const DATA = {
 		"Closet",
 		"cloud",
 		"coal",
-		"Cockatrice",
 		"coconut",
 		"coconut milk",
 		"coffin",
@@ -177,7 +172,6 @@ const DATA = {
 		"cookie dough",
 		"Coral",
 		"corpse",
-		"Cosmic egg",
 		"cotton",
 		"cotton candy",
 		"cow",
@@ -187,26 +181,20 @@ const DATA = {
 		"crystal ball",
 		"cuckoo",
 		"Cup",
-		"Cupid",
 		"Current",
-		"Curse",
 		"Cutting board",
 		"cyborg",
 		"cyclist",
-		"Cyclops",
 		"dam",
 		"Darkness",
 		"darth vader",
 		"Dawn",
 		"day",
 		"Death",
-		"Deity",
-		"Demon",
 		"desert",
 		"dew",
 		"diamond",
 		"dinosaur",
-		"Dionysus",
 		"Diver",
 		"doctor",
 		"dog",
@@ -237,7 +225,6 @@ const DATA = {
 		"electric eel",
 		"electrician",
 		"electricity",
-		"Elf",
 		"email",
 		"energy",
 		"engineer",
@@ -247,7 +234,6 @@ const DATA = {
 		"explosion",
 		"fabric",
 		"Factory",
-		"Faerie",
 		"fairy tale",
 		"family",
 		"family tree",
@@ -313,7 +299,6 @@ const DATA = {
 		"gold",
 		"Goldfish",
 		"golem",
-		"Good",
 		"granite",
 		"grass",
 		"grave",
@@ -339,7 +324,6 @@ const DATA = {
 		"hay",
 		"hay bale",
 		"Heat",
-		"Heaven",
 		"hedge",
 		"Hedgehog",
 		"helicopter",
@@ -347,8 +331,6 @@ const DATA = {
 		"hero",
 		"Hill",
 		"hippo",
-		"Holy grail",
-		"Holy water",
 		"honey",
 		"horizon",
 		"horse",
@@ -378,7 +360,6 @@ const DATA = {
 		"Jar",
 		"jedi",
 		"jerky",
-		"Jiangshi",
 		"juice",
 		"Juicy Fruit",
 		"Jupiter",
@@ -432,7 +413,6 @@ const DATA = {
 		"Maple syrup",
 		"mars",
 		"marshmallows",
-		"Maui's fishhook",
 		"mayonnaise",
 		"meat",
 		"medusa",
@@ -453,7 +433,6 @@ const DATA = {
 		"monarch",
 		"money",
 		"monkey",
-		"Monster",
 		"moon",
 		"Moon rover",
 		"moss",
@@ -471,7 +450,6 @@ const DATA = {
 		"music",
 		"Musician",
 		"narwhal",
-		"Necromancer",
 		"needle",
 		"nerd",
 		"Nerds",
@@ -502,7 +480,6 @@ const DATA = {
 		"paint",
 		"Painter",
 		"Painting",
-		"Paladin",
 		"Paleontologist",
 		"palm",
 		"Pan flute",
@@ -514,8 +491,6 @@ const DATA = {
 		"Park",
 		"parrot",
 		"pasta",
-		"Paul bunyan",
-		"Peach of immortality",
 		"peacock",
 		"Peanut butter",
 		"Peat",
@@ -528,7 +503,6 @@ const DATA = {
 		"penicillin",
 		"perfume",
 		"petroleum",
-		"Philosopher's stone",
 		"Philosophy",
 		"phoenix",
 		"picnic",
@@ -630,7 +604,6 @@ const DATA = {
 		"seasickness",
 		"seaweed",
 		"Seed",
-		"Selkie",
 		"sewing machine",
 		"shark",
 		"sheep",
@@ -746,7 +719,6 @@ const DATA = {
 		"tree",
 		"treehouse",
 		"trojan horse",
-		"Troll",
 		"tsunami",
 		"tunnel",
 		"turtle",
@@ -810,7 +782,6 @@ const DATA = {
 		"Yeti",
 		"yoda",
 		"yogurt",
-		"Zeus",
 		"zombie",
 		"Zoo"
 	],
@@ -934,7 +905,6 @@ const DATA = {
 		["bus", "barn", "Garage"],
 		["car", "barn", "Garage"],
 		["chicken", "barn", "Chicken coop"],
-		["Cockatrice", "barn", "Chicken coop"],
 		["electric car", "barn", "Garage"],
 		["farmer", "barn", "farm"],
 		["helicopter", "barn", "Hangar"],
@@ -1266,7 +1236,6 @@ const DATA = {
 		["city", "forest", "Park"],
 		["city", "garden", "Park"],
 		["city", "grass", "Park"],
-		["Monster", "city", "Kaiju"],
 		["clay", "fire", "brick"],
 		["fire", "clay", "pottery"],
 		["human", "clay", "Potter"],
@@ -1294,8 +1263,6 @@ const DATA = {
 		["pressure", "coal", "diamond"],
 		["coal", "time", "diamond"],
 		["wood", "coal", "pencil"],
-		["Cockatrice", "Container", "Chicken coop"],
-		["Cockatrice", "house", "Chicken coop"],
 		["Container", "coconut milk", "Bottle"],
 		["milk", "coconut", "coconut milk"],
 		["coconut", "tool", "coconut milk"],
@@ -1399,7 +1366,6 @@ const DATA = {
 		["corpse", "Legend", "Frankenstein's monster"],
 		["corpse", "life", "zombie"],
 		["corpse", "Lightning", "Frankenstein's monster"],
-		["Monster", "corpse", "Frankenstein's monster"],
 		["corpse", "Philosophy", "Death"],
 		["corpse", "pyramid", "mummy"],
 		["corpse", "Science", "Organic matter"],
@@ -1408,7 +1374,6 @@ const DATA = {
 		["corpse", "time", "bone"],
 		["corpse", "time", "skeleton"],
 		["wood", "corpse", "coffin"],
-		["Primordial soup", "Cosmic egg", "Universe"],
 		["cotton", "fabric", "pillow"],
 		["cotton", "tool", "thread"],
 		["farmer", "cow", "milk"],
@@ -1425,8 +1390,6 @@ const DATA = {
 		["Cup", "paper", "Paper cup"],
 		["Cup", "thread", "String phone"],
 		["Cup", "wire", "String phone"],
-		["tool", "Cupid", "Bow"],
-		["Cyclops", "tool", "Lightning"],
 		["river", "dam", "lake"],
 		["wild animal", "dam", "beaver"],
 		["day", "night", "Dawn"],
@@ -1573,7 +1536,6 @@ const DATA = {
 		["windmill", "electricity", "wind turbine"],
 		["zombie", "electricity", "frankenstein"],
 		["zombie", "electricity", "Frankenstein's monster"],
-		["tool", "Elf", "Bow"],
 		["energy", "explosion", "atomic bomb"],
 		["fruit", "energy", "sugar"],
 		["gun", "energy", "Stun gun"],
@@ -2093,8 +2055,6 @@ const DATA = {
 		["mailman", "wall", "Post office"],
 		["mailman", "wood", "Mailbox"],
 		["pirate", "map", "treasure map"],
-		["Maui's fishhook", "ocean", "Island"],
-		["Maui's fishhook", "sea", "Island"],
 		["meat", "salt", "jerky"],
 		["meat", "smoke", "ham"],
 		["meat", "sun", "jerky"],
@@ -2124,8 +2084,6 @@ const DATA = {
 		["story", "monarch", "fairy tale"],
 		["pig", "money", "piggy bank"],
 		["money", "steel", "safe"],
-		["Monster", "skyscraper", "Kaiju"],
-		["Monster", "story", "Frankenstein's monster"],
 		["ocean", "moon", "tide"],
 		["sea", "moon", "tide"],
 		["sky", "moon", "night"],
@@ -2263,7 +2221,6 @@ const DATA = {
 		["planet", "storm", "Jupiter"],
 		["sun", "planet", "solar system"],
 		["planet", "volcano", "Venus"],
-		["planet", "Zeus", "Jupiter"],
 		["plant", "plant", "garden"],
 		["Pollen", "plant", "Seed"],
 		["plant", "pond", "Reed"],
@@ -2454,7 +2411,6 @@ const DATA = {
 		["tool", "wheel", "Machine"],
 		["tool", "wood", "wheel"],
 		["wool", "tool", "sweater"],
-		["Zeus", "tool", "Lightning"],
 		["tractor", "wall", "Garage"],
 		["train", "wall", "Trainyard"],
 		["tree", "tree", "forest"],
@@ -2488,6 +2444,814 @@ const DATA = {
 	]
 };
 
+const LEGACY_ELEMENTS_V3 = [
+	"acid rain",
+	"air",
+	"airplane",
+	"alarm clock",
+	"Alchemist",
+	"alcohol",
+	"algae",
+	"alien",
+	"allergy",
+	"alligator",
+	"alpaca",
+	"ambulance",
+	"angel",
+	"angler",
+	"Animal",
+	"ant",
+	"Ant farm",
+	"antarctica",
+	"Anthill",
+	"Apron",
+	"aquarium",
+	"Archeologist",
+	"archipelago",
+	"Arctic",
+	"armadillo",
+	"armor",
+	"Arrow",
+	"ash",
+	"astronaut",
+	"Astronaut Ice Cream",
+	"Astronomer",
+	"atmosphere",
+	"atomic bomb",
+	"aurora",
+	"avalanche",
+	"Aviary",
+	"axe",
+	"Baast",
+	"Baba yaga",
+	"Babe the blue ox",
+	"bacon",
+	"bacteria",
+	"baker",
+	"bakery",
+	"banana",
+	"banana bread",
+	"bandage",
+	"bank",
+	"barn",
+	"Barrel",
+	"bat",
+	"batman",
+	"batter",
+	"Battery",
+	"bayonet",
+	"bbq",
+	"beach",
+	"beaver",
+	"bee",
+	"beehive",
+	"Beekeeper",
+	"beer",
+	"Bell",
+	"bicycle",
+	"Big",
+	"Binoculars",
+	"bird",
+	"Birdcage",
+	"birdhouse",
+	"black hole",
+	"blade",
+	"blender",
+	"blizzard",
+	"blood",
+	"Blood bag",
+	"blueprint",
+	"boat",
+	"boiler",
+	"bone",
+	"bonsai tree",
+	"book",
+	"Book of the dead",
+	"Bottle",
+	"Boulder",
+	"Bow",
+	"Box",
+	"bread",
+	"brick",
+	"bridge",
+	"broom",
+	"Bucket",
+	"bullet",
+	"bulletproof vest",
+	"bus",
+	"butcher",
+	"butter",
+	"butterfly",
+	"Butterfly net",
+	"Cable car",
+	"cactus",
+	"Cadbury Eggs",
+	"Cage",
+	"cake",
+	"camel",
+	"campfire",
+	"candle",
+	"candy cane",
+	"cannon",
+	"Canvas",
+	"cape",
+	"car",
+	"caramel",
+	"Caramel Apple",
+	"Caramelo",
+	"carbon dioxide",
+	"carrot",
+	"cart",
+	"cashmere",
+	"castle",
+	"cat",
+	"catnip",
+	"cauldron",
+	"Cave",
+	"caviar",
+	"centaur",
+	"cereal",
+	"chain",
+	"chainsaw",
+	"chameleon",
+	"charcoal",
+	"cheese",
+	"cheeseburger",
+	"chicken",
+	"Chicken coop",
+	"chicken soup",
+	"chicken wing",
+	"Chill",
+	"chimney",
+	"chocolate",
+	"chocolate milk",
+	"christmas stocking",
+	"christmas tree",
+	"cigarette",
+	"Circus",
+	"city",
+	"clay",
+	"clock",
+	"Closet",
+	"cloud",
+	"coal",
+	"Cockatrice",
+	"coconut",
+	"coconut milk",
+	"coffin",
+	"cold",
+	"Combustion engine",
+	"computer",
+	"computer mouse",
+	"confetti",
+	"constellation",
+	"Container",
+	"Continent",
+	"Cook",
+	"cookbook",
+	"cookie",
+	"Cookie cutter",
+	"cookie dough",
+	"Coral",
+	"corpse",
+	"Cosmic egg",
+	"cotton",
+	"cotton candy",
+	"cow",
+	"crayon",
+	"crow",
+	"crown",
+	"crystal ball",
+	"cuckoo",
+	"Cup",
+	"Cupid",
+	"Current",
+	"Curse",
+	"Cutting board",
+	"cyborg",
+	"cyclist",
+	"Cyclops",
+	"dam",
+	"Darkness",
+	"darth vader",
+	"Dawn",
+	"day",
+	"Death",
+	"Deity",
+	"Demon",
+	"desert",
+	"dew",
+	"diamond",
+	"dinosaur",
+	"Dionysus",
+	"Diver",
+	"doctor",
+	"dog",
+	"Doge",
+	"doghouse",
+	"Domestication",
+	"Don Quixote",
+	"donut",
+	"double rainbow!",
+	"dough",
+	"dragon",
+	"drone",
+	"drum",
+	"drunk",
+	"dry ice",
+	"duck",
+	"duckling",
+	"dune",
+	"dust",
+	"dynamite",
+	"eagle",
+	"earth",
+	"earthquake",
+	"eclipse",
+	"egg",
+	"egg timer",
+	"electric car",
+	"electric eel",
+	"electrician",
+	"electricity",
+	"Elf",
+	"email",
+	"energy",
+	"engineer",
+	"eruption",
+	"excalibur",
+	"Excavator",
+	"explosion",
+	"fabric",
+	"Factory",
+	"Faerie",
+	"fairy tale",
+	"family",
+	"family tree",
+	"farm",
+	"farmer",
+	"faun",
+	"fence",
+	"field",
+	"fire",
+	"fire extinguisher",
+	"Firefighter",
+	"fireman",
+	"fireplace",
+	"Firestation",
+	"firetruck",
+	"Firewall",
+	"fireworks",
+	"fish",
+	"fish and chips",
+	"fishing rod",
+	"flamethrower",
+	"flashlight",
+	"flood",
+	"flour",
+	"flower",
+	"flute",
+	"flying fish",
+	"flying squirrel",
+	"fog",
+	"Force knight",
+	"forest",
+	"Fork",
+	"fortune cookie",
+	"fossil",
+	"fountain",
+	"fox",
+	"frankenstein",
+	"Frankenstein's monster",
+	"french fries",
+	"fridge",
+	"frog",
+	"frozen yogurt",
+	"fruit",
+	"fruit tree",
+	"Fun Dip",
+	"galaxy",
+	"Galaxy cluster",
+	"Garage",
+	"garden",
+	"gardener",
+	"Gas",
+	"geyser",
+	"ghost",
+	"gift",
+	"gingerbread house",
+	"gingerbread man",
+	"glacier",
+	"glass",
+	"glasses",
+	"gnome",
+	"goat",
+	"godzilla",
+	"gold",
+	"Goldfish",
+	"golem",
+	"Good",
+	"granite",
+	"grass",
+	"grave",
+	"gravestone",
+	"graveyard",
+	"greenhouse",
+	"grenade",
+	"grilled cheese",
+	"grim reaper",
+	"Guinness Float",
+	"gun",
+	"gunpowder",
+	"Gust",
+	"Hacker",
+	"hail",
+	"ham",
+	"hamburger",
+	"hammer",
+	"hamster",
+	"Hangar",
+	"hard roe",
+	"harp",
+	"hay",
+	"hay bale",
+	"Heat",
+	"Heaven",
+	"hedge",
+	"Hedgehog",
+	"helicopter",
+	"herb",
+	"hero",
+	"Hill",
+	"hippo",
+	"Holy grail",
+	"Holy water",
+	"honey",
+	"horizon",
+	"horse",
+	"horseshoe",
+	"hospital",
+	"Hot chocolate",
+	"hourglass",
+	"house",
+	"human",
+	"hummingbird",
+	"hurricane",
+	"husky",
+	"ice",
+	"ice cream",
+	"ice cream truck",
+	"Ice sculpture",
+	"iceberg",
+	"iced tea",
+	"idea",
+	"igloo",
+	"internet",
+	"Island",
+	"isle",
+	"ivy",
+	"jack-o'-lantern",
+	"jam",
+	"Jar",
+	"jedi",
+	"jerky",
+	"Jiangshi",
+	"juice",
+	"Juicy Fruit",
+	"Jupiter",
+	"Kaiju",
+	"Katana",
+	"Keyboard Cat",
+	"kite",
+	"Knife",
+	"knight",
+	"lake",
+	"lamp",
+	"Land",
+	"Laptop",
+	"lasso",
+	"lava",
+	"lava lamp",
+	"Lawn",
+	"lawn mower",
+	"leaf",
+	"leather",
+	"Legend",
+	"lemonade",
+	"Lens",
+	"letter",
+	"Librarian",
+	"library",
+	"life",
+	"light",
+	"light bulb",
+	"Light sword",
+	"lighthouse",
+	"Lightning",
+	"lightsaber",
+	"lion",
+	"Liquid",
+	"Little alchemy (element)",
+	"livestock",
+	"lizard",
+	"log cabin",
+	"love",
+	"lumberjack",
+	"mac and cheese",
+	"Machine",
+	"Magic",
+	"Magma",
+	"Mail truck",
+	"Mailbox",
+	"mailman",
+	"manatee",
+	"map",
+	"Maple syrup",
+	"mars",
+	"marshmallows",
+	"Maui's fishhook",
+	"mayonnaise",
+	"meat",
+	"medusa",
+	"Mercury",
+	"mermaid",
+	"metal",
+	"meteor",
+	"meteoroid",
+	"microscope",
+	"milk",
+	"milk shake",
+	"Milky Way",
+	"Mineral",
+	"minotaur",
+	"mirror",
+	"Mist",
+	"mold",
+	"monarch",
+	"money",
+	"monkey",
+	"Monster",
+	"moon",
+	"Moon rover",
+	"moss",
+	"moth",
+	"Motion",
+	"motorcycle",
+	"Mounds",
+	"mountain",
+	"mountain goat",
+	"mountain range",
+	"mouse",
+	"mousetrap",
+	"mud",
+	"mummy",
+	"music",
+	"Musician",
+	"narwhal",
+	"Necromancer",
+	"needle",
+	"nerd",
+	"Nerds",
+	"Nessie",
+	"nest",
+	"Net",
+	"newspaper",
+	"night",
+	"ninja",
+	"Ninja Turtle",
+	"nut",
+	"Nuts",
+	"oasis",
+	"obsidian",
+	"ocean",
+	"oil",
+	"oil lamp",
+	"omelette",
+	"optical fiber",
+	"orchard",
+	"Ore",
+	"Organic matter",
+	"origami",
+	"ostrich",
+	"owl",
+	"oxygen",
+	"ozone",
+	"paint",
+	"Painter",
+	"Painting",
+	"Paladin",
+	"Paleontologist",
+	"palm",
+	"Pan flute",
+	"paper",
+	"paper airplane",
+	"Paper cup",
+	"parachute",
+	"Paraglider",
+	"Park",
+	"parrot",
+	"pasta",
+	"Paul bunyan",
+	"Peach of immortality",
+	"peacock",
+	"Peanut butter",
+	"Peat",
+	"Pebble",
+	"Peeps",
+	"pegasus",
+	"pencil",
+	"pencil sharpener",
+	"penguin",
+	"penicillin",
+	"perfume",
+	"petroleum",
+	"Philosopher's stone",
+	"Philosophy",
+	"phoenix",
+	"picnic",
+	"pie",
+	"pig",
+	"pigeon",
+	"piggy bank",
+	"pillow",
+	"pilot",
+	"pinocchio",
+	"pipe",
+	"piranha",
+	"pirate",
+	"pirate ship",
+	"pitchfork",
+	"pizza",
+	"planet",
+	"plankton",
+	"plant",
+	"Plasma",
+	"platypus",
+	"Plow",
+	"Pokki",
+	"Polar bear",
+	"Pollen",
+	"pond",
+	"Pop Rocks",
+	"popsicle",
+	"Post office",
+	"Potato",
+	"Potter",
+	"pottery",
+	"pressure",
+	"Primordial soup",
+	"printer",
+	"prism",
+	"pterodactyl",
+	"puddle",
+	"pumpkin",
+	"pyramid",
+	"quicksand",
+	"Quicksilver",
+	"rabbit",
+	"rain",
+	"rainbow",
+	"Rainforest",
+	"rat",
+	"recipe",
+	"Red Vines",
+	"Reed",
+	"reindeer",
+	"Restaurant",
+	"ring",
+	"Ring Pop",
+	"river",
+	"Rivulet",
+	"robot",
+	"Robot vacuum",
+	"Rock",
+	"rocket",
+	"Roe",
+	"roller coaster",
+	"roomba",
+	"rope",
+	"rose",
+	"ruins",
+	"ruler",
+	"rust",
+	"rv",
+	"Sack",
+	"saddle",
+	"safe",
+	"safety glasses",
+	"sailboat",
+	"sailor",
+	"salt",
+	"Samurai",
+	"sand",
+	"sand castle",
+	"sandpaper",
+	"sandstone",
+	"sandstorm",
+	"sandwich",
+	"santa",
+	"Sap",
+	"saturn",
+	"scalpel",
+	"scarecrow",
+	"Science",
+	"scissors",
+	"scorpion",
+	"Scuba tank",
+	"scythe",
+	"sea",
+	"seagull",
+	"seahorse",
+	"seal",
+	"seaplane",
+	"seasickness",
+	"seaweed",
+	"Seed",
+	"Selkie",
+	"sewing machine",
+	"shark",
+	"sheep",
+	"sheet music",
+	"Shovel",
+	"shuriken",
+	"sickness",
+	"Silo",
+	"skateboard",
+	"skeleton",
+	"ski goggles",
+	"Skier",
+	"Skittles",
+	"sky",
+	"skyscraper",
+	"sledge",
+	"Sleigh",
+	"sloth",
+	"Small",
+	"Smartphone",
+	"smog",
+	"smoke",
+	"smoke signal",
+	"smoothie",
+	"snake",
+	"snow",
+	"snow globe",
+	"snowball",
+	"snowboard",
+	"Snowboarder",
+	"snowman",
+	"snowmobile",
+	"soap",
+	"soap bubble",
+	"soda",
+	"Soil",
+	"solar cell",
+	"solar system",
+	"Solid",
+	"sound",
+	"space",
+	"space station",
+	"spaceship",
+	"spaghetti",
+	"sphinx",
+	"spider",
+	"Spoon",
+	"Spotlight",
+	"sprinkles",
+	"squirrel",
+	"star",
+	"Starburst",
+	"starfish",
+	"statue",
+	"steak",
+	"steam",
+	"steam engine",
+	"steamboat",
+	"steel",
+	"steel wool",
+	"stethoscope",
+	"stone",
+	"storm",
+	"story",
+	"Stream",
+	"String phone",
+	"Stun gun",
+	"sugar",
+	"sun",
+	"sundial",
+	"sunflower",
+	"sunglasses",
+	"super nova",
+	"Supernova",
+	"surfer",
+	"sushi",
+	"swamp",
+	"sweater",
+	"Swedish Fish",
+	"Sweethearts",
+	"swim goggles",
+	"swimmer",
+	"Swimming pool",
+	"sword",
+	"swordfish",
+	"Syringe",
+	"Tablet",
+	"Tailor",
+	"tank",
+	"Tardis",
+	"taser",
+	"tea",
+	"telescope",
+	"tent",
+	"The Doctor",
+	"The One Ring",
+	"Thermometer",
+	"thread",
+	"tide",
+	"time",
+	"titanic",
+	"toast",
+	"tobacco",
+	"tool",
+	"Toolbox",
+	"Tornado",
+	"toucan",
+	"tractor",
+	"train",
+	"Trainyard",
+	"treasure",
+	"treasure map",
+	"tree",
+	"treehouse",
+	"trojan horse",
+	"Troll",
+	"tsunami",
+	"tunnel",
+	"turtle",
+	"twilight",
+	"Twix",
+	"tyrannosaurus rex",
+	"ufo",
+	"umbrella",
+	"unicorn",
+	"Universe",
+	"vacuum cleaner",
+	"vampire",
+	"vase",
+	"Vault",
+	"vegetable",
+	"Venus",
+	"village",
+	"Vine",
+	"vinegar",
+	"volcano",
+	"vulture",
+	"wagon",
+	"wall",
+	"wallet",
+	"wand",
+	"Warmth",
+	"warrior",
+	"watch",
+	"water",
+	"water gun",
+	"water lily",
+	"water pipe",
+	"waterfall",
+	"waterwheel",
+	"wave",
+	"wax",
+	"web",
+	"werewolf",
+	"wheat",
+	"wheel",
+	"wild animal",
+	"wild boar",
+	"Willy Wonka",
+	"wind",
+	"wind turbine",
+	"windmill",
+	"window",
+	"Windsurfer",
+	"wine",
+	"wire",
+	"witch",
+	"wizard",
+	"wolf",
+	"wood",
+	"woodpecker",
+	"wool",
+	"wrapping paper",
+	"Writer",
+	"x-ray",
+	"yak",
+	"Yeti",
+	"yoda",
+	"yogurt",
+	"Zeus",
+	"zombie",
+	"Zoo"
+];
+
 const form = document.getElementById("combine-form");
 const firstSelect = document.getElementById("first-element");
 const secondSelect = document.getElementById("second-element");
@@ -2500,7 +3264,9 @@ const saveDataInput = document.getElementById("save-data-input");
 
 const SAVE_KEY = "alchemist-save-v1";
 const SAVE_INTERVAL_MS = 2000;
-const SAVE_FORMAT_PREFIX = "b3:";
+const SAVE_FORMAT_PREFIX_V4 = "b4:";
+const SAVE_FORMAT_PREFIX_V3 = "b3:";
+const DATA_ID = "e776-r1655-4b33bc6d";
 
 const elementNameByLower = new Map();
 for (const element of DATA.elements) {
@@ -2585,71 +3351,124 @@ function renderInventory() {
 	totalCount.textContent = `${count}/${total} elements unlocked (${percent.toFixed(1)}%)`;
 }
 
-function encodeBase64(text) {
-	const bytes = new TextEncoder().encode(text);
-	let binary = "";
-	for (const byte of bytes) binary += String.fromCharCode(byte);
-	return btoa(binary);
-}
-
-function decodeBase64(encoded) {
-	const binary = atob(encoded);
-	const bytes = new Uint8Array(binary.length);
-	for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
-	return new TextDecoder().decode(bytes);
-}
-
 function bytesToBase64(bytes) {
 	let binary = "";
-	for (const value of bytes) binary += String.fromCharCode(value);
+	for (const value of bytes) {
+		binary += String.fromCharCode(value);
+	}
 	return btoa(binary);
 }
 
 function base64ToBytes(encoded) {
 	const binary = atob(encoded);
 	const bytes = new Uint8Array(binary.length);
-	for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+	for (let i = 0; i < binary.length; i += 1) {
+		bytes[i] = binary.charCodeAt(i);
+	}
 	return bytes;
 }
 
-function encodeBitsetSave() {
-	const sorted = Array.from(activeElementSet).sort((a, b) => a.localeCompare(b));
-	const byteLength = Math.ceil(sorted.length / 8);
+function getOrderedElements() {
+	return Array.from(activeElementSet).sort((a, b) => a.localeCompare(b));
+}
+
+function encodeBitsetForElements(orderedElements) {
+	const byteLength = Math.ceil(orderedElements.length / 8);
 	const bits = new Uint8Array(byteLength);
-	for (let i = 0; i < sorted.length; i += 1) {
-		if (!unlocked.has(sorted[i])) continue;
+	for (let i = 0; i < orderedElements.length; i += 1) {
+		if (!unlocked.has(orderedElements[i])) {
+			continue;
+		}
 		bits[i >> 3] |= 1 << (i & 7);
 	}
-	return SAVE_FORMAT_PREFIX + bytesToBase64(bits);
+	return bits;
 }
 
-function applyBitsetSave(encoded) {
-	const sorted = Array.from(activeElementSet).sort((a, b) => a.localeCompare(b));
-	const bytes = base64ToBytes(encoded);
-	if (bytes.length < Math.ceil(sorted.length / 8)) return false;
-	unlocked.clear();
-	for (let i = 0; i < sorted.length; i += 1) {
-		const bit = (bytes[i >> 3] >> (i & 7)) & 1;
-		if (bit === 1) unlocked.add(sorted[i]);
+function decodeBitsetToNames(bitsetBytes, orderedElements) {
+	const neededBytes = Math.ceil(orderedElements.length / 8);
+	if (bitsetBytes.length < neededBytes) {
+		return null;
 	}
-	return true;
+	const names = [];
+	for (let i = 0; i < orderedElements.length; i += 1) {
+		const bit = (bitsetBytes[i >> 3] >> (i & 7)) & 1;
+		if (bit === 1) {
+			names.push(orderedElements[i]);
+		}
+	}
+	return names;
 }
 
-function applyLegacySavePayload(payload) {
-	if (!payload || !Array.isArray(payload.unlocked)) return false;
+function applyUnlockedNames(names) {
 	unlocked.clear();
-	for (const item of payload.unlocked) {
-		const canonical = toCanonicalName(item);
-		if (activeElementSet.has(canonical)) unlocked.add(canonical);
+	for (const item of names) {
+		const canonicalName = toCanonicalName(item);
+		if (activeElementSet.has(canonicalName)) {
+			unlocked.add(canonicalName);
+		}
 	}
 	if (unlocked.size === 0) {
-		for (const element of activeElementSet) unlocked.add(element);
+		for (const element of activeElementSet) {
+			unlocked.add(element);
+		}
 	}
 	return true;
 }
 
 function getEncodedSavePayload() {
-	return encodeBitsetSave();
+	const ordered = getOrderedElements();
+	const bits = encodeBitsetForElements(ordered);
+	const payload = bytesToBase64(bits);
+	return `${SAVE_FORMAT_PREFIX_V4}${DATA_ID}:${payload}`;
+}
+
+function tryApplyV4Save(encoded) {
+	if (!encoded.startsWith(SAVE_FORMAT_PREFIX_V4)) {
+		return false;
+	}
+	const body = encoded.slice(SAVE_FORMAT_PREFIX_V4.length);
+	const split = body.indexOf(":");
+	if (split < 0) {
+		return false;
+	}
+	const incomingDataId = body.slice(0, split);
+	const bitsetPart = body.slice(split + 1);
+	if (incomingDataId !== DATA_ID) {
+		return false;
+	}
+	const bytes = base64ToBytes(bitsetPart);
+	const names = decodeBitsetToNames(bytes, getOrderedElements());
+	if (!names) {
+		return false;
+	}
+	return applyUnlockedNames(names);
+}
+
+function tryApplyV3Save(encoded) {
+	if (!encoded.startsWith(SAVE_FORMAT_PREFIX_V3)) {
+		return false;
+	}
+	const bitsetPart = encoded.slice(SAVE_FORMAT_PREFIX_V3.length);
+	const bytes = base64ToBytes(bitsetPart);
+	const names = decodeBitsetToNames(bytes, LEGACY_ELEMENTS_V3);
+	if (!names) {
+		return false;
+	}
+	return applyUnlockedNames(names);
+}
+
+function tryApplyLegacyJsonSave(encoded) {
+	const binary = atob(encoded);
+	const bytes = new Uint8Array(binary.length);
+	for (let i = 0; i < binary.length; i += 1) {
+		bytes[i] = binary.charCodeAt(i);
+	}
+	const raw = new TextDecoder().decode(bytes);
+	const parsed = JSON.parse(raw);
+	if (!parsed || !Array.isArray(parsed.unlocked)) {
+		return false;
+	}
+	return applyUnlockedNames(parsed.unlocked);
 }
 
 function saveGame() {
@@ -2662,16 +3481,19 @@ function saveGame() {
 function loadGame() {
 	try {
 		const encoded = localStorage.getItem(SAVE_KEY);
-		if (!encoded) return;
-		if (encoded.startsWith(SAVE_FORMAT_PREFIX)) {
-			const applied = applyBitsetSave(encoded.slice(SAVE_FORMAT_PREFIX.length));
-			if (!applied) throw new Error("invalid bitset save");
+		if (!encoded) {
 			return;
 		}
-		// Backward-compat for old JSON-in-base64 saves.
-		const raw = decodeBase64(encoded);
-		const parsed = JSON.parse(raw);
-		applyLegacySavePayload(parsed);
+		if (tryApplyV4Save(encoded)) {
+			return;
+		}
+		if (tryApplyV3Save(encoded)) {
+			saveGame();
+			return;
+		}
+		if (tryApplyLegacyJsonSave(encoded)) {
+			saveGame();
+		}
 	} catch (error) {
 	}
 }
@@ -2694,24 +3516,15 @@ function importSaveData() {
 		return;
 	}
 	try {
-		if (encoded.startsWith(SAVE_FORMAT_PREFIX)) {
-			const ok = applyBitsetSave(encoded.slice(SAVE_FORMAT_PREFIX.length));
-			if (!ok) {
-				resultText.textContent = "could not import save data.";
-				return;
-			}
-		} else {
-			// Backward-compat for old JSON-in-base64 saves.
-			const raw = decodeBase64(encoded);
-			const parsed = JSON.parse(raw);
-			if (!applyLegacySavePayload(parsed)) {
-				resultText.textContent = "could not import save data.";
-				return;
-			}
+		const ok = tryApplyV4Save(encoded) || tryApplyV3Save(encoded) || tryApplyLegacyJsonSave(encoded);
+		if (!ok) {
+			resultText.textContent = "could not import save data.";
+			return;
 		}
 		populateElementOptions();
 		renderInventory();
 		saveGame();
+		saveDataInput.value = getEncodedSavePayload();
 		resultText.textContent = "save data imported.";
 	} catch (error) {
 		resultText.textContent = "could not import save data.";
