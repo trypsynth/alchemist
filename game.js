@@ -2500,6 +2500,7 @@ const saveDataInput = document.getElementById("save-data-input");
 
 const SAVE_KEY = "alchemist-save-v1";
 const SAVE_INTERVAL_MS = 2000;
+const SAVE_FORMAT_PREFIX = "b3:";
 
 const elementNameByLower = new Map();
 for (const element of DATA.elements) {
@@ -2584,52 +2585,71 @@ function renderInventory() {
 	totalCount.textContent = `${count}/${total} elements unlocked (${percent.toFixed(1)}%)`;
 }
 
-function getSavePayload() {
-	return {
-		version: 3,
-		unlocked: Array.from(unlocked).sort((a, b) => a.localeCompare(b))
-	};
-}
-
 function encodeBase64(text) {
 	const bytes = new TextEncoder().encode(text);
 	let binary = "";
-	for (const byte of bytes) {
-		binary += String.fromCharCode(byte);
-	}
+	for (const byte of bytes) binary += String.fromCharCode(byte);
 	return btoa(binary);
 }
 
 function decodeBase64(encoded) {
 	const binary = atob(encoded);
 	const bytes = new Uint8Array(binary.length);
-	for (let i = 0; i < binary.length; i += 1) {
-		bytes[i] = binary.charCodeAt(i);
-	}
+	for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
 	return new TextDecoder().decode(bytes);
 }
 
-function getEncodedSavePayload() {
-	return encodeBase64(JSON.stringify(getSavePayload()));
+function bytesToBase64(bytes) {
+	let binary = "";
+	for (const value of bytes) binary += String.fromCharCode(value);
+	return btoa(binary);
 }
 
-function applySavePayload(payload) {
-	if (!payload || !Array.isArray(payload.unlocked)) {
-		return false;
+function base64ToBytes(encoded) {
+	const binary = atob(encoded);
+	const bytes = new Uint8Array(binary.length);
+	for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+	return bytes;
+}
+
+function encodeBitsetSave() {
+	const sorted = Array.from(activeElementSet).sort((a, b) => a.localeCompare(b));
+	const byteLength = Math.ceil(sorted.length / 8);
+	const bits = new Uint8Array(byteLength);
+	for (let i = 0; i < sorted.length; i += 1) {
+		if (!unlocked.has(sorted[i])) continue;
+		bits[i >> 3] |= 1 << (i & 7);
 	}
+	return SAVE_FORMAT_PREFIX + bytesToBase64(bits);
+}
+
+function applyBitsetSave(encoded) {
+	const sorted = Array.from(activeElementSet).sort((a, b) => a.localeCompare(b));
+	const bytes = base64ToBytes(encoded);
+	if (bytes.length < Math.ceil(sorted.length / 8)) return false;
+	unlocked.clear();
+	for (let i = 0; i < sorted.length; i += 1) {
+		const bit = (bytes[i >> 3] >> (i & 7)) & 1;
+		if (bit === 1) unlocked.add(sorted[i]);
+	}
+	return true;
+}
+
+function applyLegacySavePayload(payload) {
+	if (!payload || !Array.isArray(payload.unlocked)) return false;
 	unlocked.clear();
 	for (const item of payload.unlocked) {
 		const canonical = toCanonicalName(item);
-		if (activeElementSet.has(canonical)) {
-			unlocked.add(canonical);
-		}
+		if (activeElementSet.has(canonical)) unlocked.add(canonical);
 	}
 	if (unlocked.size === 0) {
-		for (const element of activeElementSet) {
-			unlocked.add(element);
-		}
+		for (const element of activeElementSet) unlocked.add(element);
 	}
 	return true;
+}
+
+function getEncodedSavePayload() {
+	return encodeBitsetSave();
 }
 
 function saveGame() {
@@ -2642,12 +2662,16 @@ function saveGame() {
 function loadGame() {
 	try {
 		const encoded = localStorage.getItem(SAVE_KEY);
-		if (!encoded) {
+		if (!encoded) return;
+		if (encoded.startsWith(SAVE_FORMAT_PREFIX)) {
+			const applied = applyBitsetSave(encoded.slice(SAVE_FORMAT_PREFIX.length));
+			if (!applied) throw new Error("invalid bitset save");
 			return;
 		}
+		// Backward-compat for old JSON-in-base64 saves.
 		const raw = decodeBase64(encoded);
 		const parsed = JSON.parse(raw);
-		applySavePayload(parsed);
+		applyLegacySavePayload(parsed);
 	} catch (error) {
 	}
 }
@@ -2670,11 +2694,20 @@ function importSaveData() {
 		return;
 	}
 	try {
-		const raw = decodeBase64(encoded);
-		const parsed = JSON.parse(raw);
-		if (!applySavePayload(parsed)) {
-			resultText.textContent = "could not import save data.";
-			return;
+		if (encoded.startsWith(SAVE_FORMAT_PREFIX)) {
+			const ok = applyBitsetSave(encoded.slice(SAVE_FORMAT_PREFIX.length));
+			if (!ok) {
+				resultText.textContent = "could not import save data.";
+				return;
+			}
+		} else {
+			// Backward-compat for old JSON-in-base64 saves.
+			const raw = decodeBase64(encoded);
+			const parsed = JSON.parse(raw);
+			if (!applyLegacySavePayload(parsed)) {
+				resultText.textContent = "could not import save data.";
+				return;
+			}
 		}
 		populateElementOptions();
 		renderInventory();
