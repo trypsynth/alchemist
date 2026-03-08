@@ -2544,18 +2544,14 @@ function renderInventory() {
 
 function bytesToBase64(bytes) {
 	let binary = "";
-	for (const value of bytes) {
-		binary += String.fromCharCode(value);
-	}
+	for (const value of bytes) binary += String.fromCharCode(value);
 	return btoa(binary);
 }
 
 function base64ToBytes(encoded) {
 	const binary = atob(encoded);
 	const bytes = new Uint8Array(binary.length);
-	for (let i = 0; i < binary.length; i += 1) {
-		bytes[i] = binary.charCodeAt(i);
-	}
+	for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
 	return bytes;
 }
 
@@ -2567,9 +2563,7 @@ function encodeBitsetForElements(orderedElements) {
 	const byteLength = Math.ceil(orderedElements.length / 8);
 	const bits = new Uint8Array(byteLength);
 	for (let i = 0; i < orderedElements.length; i += 1) {
-		if (!unlocked.has(orderedElements[i])) {
-			continue;
-		}
+		if (!unlocked.has(orderedElements[i])) continue;
 		bits[i >> 3] |= 1 << (i & 7);
 	}
 	return bits;
@@ -2577,15 +2571,11 @@ function encodeBitsetForElements(orderedElements) {
 
 function decodeBitsetToNames(bitsetBytes, orderedElements) {
 	const neededBytes = Math.ceil(orderedElements.length / 8);
-	if (bitsetBytes.length < neededBytes) {
-		return null;
-	}
+	if (bitsetBytes.length < neededBytes) return null;
 	const names = [];
 	for (let i = 0; i < orderedElements.length; i += 1) {
 		const bit = (bitsetBytes[i >> 3] >> (i & 7)) & 1;
-		if (bit === 1) {
-			names.push(orderedElements[i]);
-		}
+		if (bit === 1) names.push(orderedElements[i]);
 	}
 	return names;
 }
@@ -2594,14 +2584,10 @@ function applyUnlockedNames(names) {
 	unlocked.clear();
 	for (const item of names) {
 		const canonicalName = toCanonicalName(item);
-		if (activeElementSet.has(canonicalName)) {
-			unlocked.add(canonicalName);
-		}
+		if (activeElementSet.has(canonicalName)) unlocked.add(canonicalName);
 	}
 	if (unlocked.size === 0) {
-		for (const element of DATA.baseElements) {
-			unlocked.add(toCanonicalName(element));
-		}
+		for (const element of DATA.baseElements) unlocked.add(toCanonicalName(element));
 	}
 	return true;
 }
@@ -2614,38 +2600,26 @@ function getEncodedSavePayload() {
 }
 
 function tryApplyV4Save(encoded) {
-	if (!encoded.startsWith(SAVE_FORMAT_PREFIX_V4)) {
-		return false;
-	}
+	if (!encoded.startsWith(SAVE_FORMAT_PREFIX_V4)) return false;
 	const body = encoded.slice(SAVE_FORMAT_PREFIX_V4.length);
 	const split = body.indexOf(":");
-	if (split < 0) {
-		return false;
-	}
+	if (split < 0) return false;
 	const incomingDataId = body.slice(0, split);
 	const bitsetPart = body.slice(split + 1);
-	if (incomingDataId !== DATA_ID) {
-		return false;
-	}
+	if (incomingDataId !== DATA_ID) return false;
 	const bytes = base64ToBytes(bitsetPart);
 	const names = decodeBitsetToNames(bytes, getOrderedElements());
-	if (!names) {
-		return false;
-	}
+	if (!names) return false;
 	return applyUnlockedNames(names);
 }
 
 function tryApplyLegacyJsonSave(encoded) {
 	const binary = atob(encoded);
 	const bytes = new Uint8Array(binary.length);
-	for (let i = 0; i < binary.length; i += 1) {
-		bytes[i] = binary.charCodeAt(i);
-	}
+	for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
 	const raw = new TextDecoder().decode(bytes);
 	const parsed = JSON.parse(raw);
-	if (!parsed || !Array.isArray(parsed.unlocked)) {
-		return false;
-	}
+	if (!parsed || !Array.isArray(parsed.unlocked)) return false;
 	return applyUnlockedNames(parsed.unlocked);
 }
 
@@ -2659,15 +2633,9 @@ function saveGame() {
 function loadGame() {
 	try {
 		const encoded = localStorage.getItem(SAVE_KEY);
-		if (!encoded) {
-			return;
-		}
-		if (tryApplyV4Save(encoded)) {
-			return;
-		}
-		if (tryApplyLegacyJsonSave(encoded)) {
-			saveGame();
-		}
+		if (!encoded) return;
+		if (tryApplyV4Save(encoded)) return;
+		if (tryApplyLegacyJsonSave(encoded)) saveGame();
 	} catch (error) {
 	}
 }
@@ -2740,17 +2708,9 @@ function handleSelectEnterKey(event) {
 
 firstSelect.addEventListener("keydown", handleSelectEnterKey);
 secondSelect.addEventListener("keydown", handleSelectEnterKey);
-
-copySaveButton.addEventListener("click", () => {
-	copySaveDataToClipboard();
-});
-
-importSaveButton.addEventListener("click", () => {
-	importSaveData();
-});
+copySaveButton.addEventListener("click", copySaveDataToClipboard);
+importSaveButton.addEventListener("click", importSaveData);
 
 clearSaveButton.addEventListener("click", () => {
-	if (confirm("Are you sure you want to clear your save? This cannot be undone.")) {
-		clearSaveData();
-	}
+	if (confirm("Are you sure you want to clear your save? This cannot be undone.")) clearSaveData();
 });
