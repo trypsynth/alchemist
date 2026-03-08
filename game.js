@@ -1,6 +1,10 @@
 "use strict";
 
-const DATA = {
+/*
+	Stage 1: Little Alchemy 1 merged dataset.
+	Stage 2: Little Alchemy 2 dataset.
+*/
+const STAGE_ONE = {
 	baseElements: [
 		"air",
 		"earth",
@@ -1637,12 +1641,870 @@ const DATA = {
 	]
 };
 
-const elementNameByLower = new Map();
-for (const element of DATA.elements) {
-	elementNameByLower.set(element.toLowerCase(), element);
-}
-const recipeIndex = buildRecipeIndex(DATA.recipes);
-const unlocked = new Set(DATA.baseElements.map(toCanonicalName));
+const STAGE_TWO = {
+	baseElements: [
+		"Air",
+		"Earth",
+		"Fire",
+		"Water"
+	],
+	elements: [
+		"Alchemist",
+		"Animal",
+		"Ant farm",
+		"Anthill",
+		"Apron",
+		"Archeologist",
+		"Arctic",
+		"Arrow",
+		"Astronomer",
+		"Aviary",
+		"Baast",
+		"Baba yaga",
+		"Babe the blue ox",
+		"Barrel",
+		"Battery",
+		"Beekeeper",
+		"Bell",
+		"Big",
+		"Binoculars",
+		"Birdcage",
+		"Blood bag",
+		"Book of the dead",
+		"Bottle",
+		"Boulder",
+		"Bow",
+		"Box",
+		"Bucket",
+		"Butterfly net",
+		"Cable car",
+		"Cage",
+		"Canvas",
+		"Cave",
+		"Chicken coop",
+		"Chill",
+		"Circus",
+		"Closet",
+		"Cockatrice",
+		"Combustion engine",
+		"Container",
+		"Continent",
+		"Cook",
+		"Cookie cutter",
+		"Coral",
+		"Cosmic egg",
+		"Cup",
+		"Cupid",
+		"Current",
+		"Curse",
+		"Cutting board",
+		"Cyclops",
+		"Darkness",
+		"Dawn",
+		"Death",
+		"Deity",
+		"Demon",
+		"Dionysus",
+		"Diver",
+		"Domestication",
+		"Elf",
+		"Excavator",
+		"Factory",
+		"Faerie",
+		"Firefighter",
+		"Firestation",
+		"Firewall",
+		"Force knight",
+		"Fork",
+		"Frankenstein's monster",
+		"Galaxy cluster",
+		"Garage",
+		"Gas",
+		"Good",
+		"Gust",
+		"Hacker",
+		"Hangar",
+		"Heat",
+		"Heaven",
+		"Hedgehog",
+		"Hill",
+		"Holy grail",
+		"Holy water",
+		"Hot chocolate",
+		"Ice sculpture",
+		"Island",
+		"Jar",
+		"Jiangshi",
+		"Jupiter",
+		"Kaiju",
+		"Katana",
+		"Knife",
+		"Land",
+		"Laptop",
+		"Lawn",
+		"Legend",
+		"Lens",
+		"Librarian",
+		"Light sword",
+		"Lightning",
+		"Liquid",
+		"Little alchemy (element)",
+		"Machine",
+		"Magic",
+		"Magma",
+		"Mail truck",
+		"Mailbox",
+		"Maple syrup",
+		"Maui's fishhook",
+		"Mercury",
+		"Mineral",
+		"Mist",
+		"Monster",
+		"Moon rover",
+		"Motion",
+		"Musician",
+		"Necromancer",
+		"Net",
+		"Nuts",
+		"Ore",
+		"Organic matter",
+		"Painter",
+		"Painting",
+		"Paladin",
+		"Paleontologist",
+		"Pan flute",
+		"Paper cup",
+		"Paraglider",
+		"Park",
+		"Paul bunyan",
+		"Peach of immortality",
+		"Peanut butter",
+		"Peat",
+		"Pebble",
+		"Philosopher's stone",
+		"Philosophy",
+		"Plasma",
+		"Plow",
+		"Polar bear",
+		"Pollen",
+		"Post office",
+		"Potato",
+		"Potter",
+		"Primordial soup",
+		"Quicksilver",
+		"Rainforest",
+		"Reed",
+		"Restaurant",
+		"Rivulet",
+		"Robot vacuum",
+		"Rock",
+		"Roe",
+		"Sack",
+		"Samurai",
+		"Sap",
+		"Science",
+		"Scuba tank",
+		"Seed",
+		"Selkie",
+		"Shovel",
+		"Silo",
+		"Skier",
+		"Sleigh",
+		"Small",
+		"Smartphone",
+		"Snowboarder",
+		"Soil",
+		"Solid",
+		"Spoon",
+		"Spotlight",
+		"Stream",
+		"String phone",
+		"Stun gun",
+		"Supernova",
+		"Swimming pool",
+		"Syringe",
+		"Tablet",
+		"Tailor",
+		"Thermometer",
+		"Toolbox",
+		"Tornado",
+		"Trainyard",
+		"Troll",
+		"Universe",
+		"Vault",
+		"Venus",
+		"Vine",
+		"Warmth",
+		"Windsurfer",
+		"Writer",
+		"Zeus",
+		"Zoo"
+	],
+	recipes: [
+		["Soil", "Soil", "Land"],
+		["Soil", "Big", "Land"],
+		["Continent", "Small", "Land"],
+		["Earth", "Earth", "Land"],
+		["Earth", "Stone", "Land"],
+		["Air", "Water", "Mist"],
+		["Air", "Steam", "Mist"],
+		["Air", "Rain", "Mist"],
+		["Land", "Big", "Continent"],
+		["Land", "Land", "Continent"],
+		["Land", "Earth", "Continent"],
+		["Mountain range", "Mountain range", "Continent"],
+		["Fire", "Idea", "Heat"],
+		["Fire", "Science", "Heat"],
+		["Lava", "Philosophy", "Heat"],
+		["Air", "Energy", "Heat"],
+		["Science", "Star", "Plasma"],
+		["Science", "Sun", "Plasma"],
+		["Heat", "Heat", "Plasma"],
+		["Heat", "Pressure", "Plasma"],
+		["Storm", "Storm", "Tornado"],
+		["Storm", "Wind", "Tornado"],
+		["Storm", "Motion", "Tornado"],
+		["Wind", "Big", "Tornado"],
+		["Wind", "Wind", "Tornado"],
+		["Wind", "Motion", "Tornado"],
+		["Heat", "Air", "Warmth"],
+		["Heat", "Human", "Warmth"],
+		["Fire", "Wall", "Firewall"],
+		["Planet", "Small", "Mercury"],
+		["Planet", "Heat", "Mercury"],
+		["Earth", "Metal", "Plow"],
+		["Earth", "Steel", "Plow"],
+		["Earth", "Wood", "Plow"],
+		["Field", "Metal", "Plow"],
+		["Field", "Steel", "Plow"],
+		["Field", "Wood", "Plow"],
+		["Field", "Tool", "Plow"],
+		["Planet", "Acid rain", "Venus"],
+		["Planet", "Smog", "Venus"],
+		["Planet", "Volcano", "Venus"],
+		["Ocean", "Motion", "Current"],
+		["Ocean", "Heat", "Current"],
+		["Ocean", "Cold", "Current"],
+		["Ocean", "Science", "Current"],
+		["Sea", "Motion", "Current"],
+		["Sea", "Heat", "Current"],
+		["Sea", "Cold", "Current"],
+		["Sea", "Science", "Current"],
+		["House", "Chimney", "Factory"],
+		["House", "Tool", "Factory"],
+		["Volcano", "Sea", "Island"],
+		["Volcano", "Ocean", "Island"],
+		["Maui's fishhook", "Ocean", "Island"],
+		["Maui's fishhook", "Sea", "Island"],
+		["Blade", "Heat", "Katana"],
+		["Blade", "Shuriken", "Katana"],
+		["Blade", "Ninja", "Katana"],
+		["Sword", "Shuriken", "Katana"],
+		["Sword", "Ninja", "Katana"],
+		["Lava", "Ocean", "Primordial soup"],
+		["Lava", "Sea", "Primordial soup"],
+		["Planet", "Ocean", "Primordial soup"],
+		["Planet", "Sea", "Primordial soup"],
+		["Earth", "Ocean", "Primordial soup"],
+		["Earth", "Sea", "Primordial soup"],
+		["Explosion", "Star", "Supernova"],
+		["Explosion", "Sun", "Supernova"],
+		["Explosion", "Galaxy", "Supernova"],
+		["Explosion", "Space", "Supernova"],
+		["House", "Lake", "Swimming pool"],
+		["House", "Swimmer", "Swimming pool"],
+		["Aquarium", "Big", "Swimming pool"],
+		["Sound", "Metal", "Bell"],
+		["Sound", "Steel", "Bell"],
+		["Sound", "Wood", "Bell"],
+		["Metal", "Hammer", "Bell"],
+		["Steel", "Hammer", "Bell"],
+		["Telescope", "Telescope", "Binoculars"],
+		["Glasses", "Glasses", "Binoculars"],
+		["Galaxy", "Galaxy", "Galaxy cluster"],
+		["Galaxy", "Container", "Galaxy cluster"],
+		["Airplane", "Container", "Hangar"],
+		["Airplane", "House", "Hangar"],
+		["Airplane", "Wall", "Hangar"],
+		["Airplane", "Barn", "Hangar"],
+		["Seaplane", "Container", "Hangar"],
+		["Seaplane", "House", "Hangar"],
+		["Seaplane", "Wall", "Hangar"],
+		["Seaplane", "Barn", "Hangar"],
+		["Helicopter", "Container", "Hangar"],
+		["Helicopter", "House", "Hangar"],
+		["Helicopter", "Wall", "Hangar"],
+		["Helicopter", "Barn", "Hangar"],
+		["Rocket", "Container", "Hangar"],
+		["Rocket", "House", "Hangar"],
+		["Rocket", "Wall", "Hangar"],
+		["Rocket", "Barn", "Hangar"],
+		["Spaceship", "Container", "Hangar"],
+		["Spaceship", "House", "Hangar"],
+		["Spaceship", "Wall", "Hangar"],
+		["Spaceship", "Barn", "Hangar"],
+		["Planet", "Cloud", "Jupiter"],
+		["Planet", "Storm", "Jupiter"],
+		["Planet", "Big", "Jupiter"],
+		["Planet", "Gas", "Jupiter"],
+		["Planet", "Zeus", "Jupiter"],
+		["Saturn", "Big", "Jupiter"],
+		["Sword", "Light", "Light sword"],
+		["Sword", "Electricity", "Light sword"],
+		["Sword", "Energy", "Light sword"],
+		["Sword", "Space", "Light sword"],
+		["Sword", "Force knight", "Light sword"],
+		["Electricity", "Cloud", "Lightning"],
+		["Electricity", "Storm", "Lightning"],
+		["Electricity", "Rain", "Lightning"],
+		["Energy", "Cloud", "Lightning"],
+		["Energy", "Storm", "Lightning"],
+		["Energy", "Rain", "Lightning"],
+		["Land", "Storm", "Lightning"],
+		["Zeus", "Tool", "Lightning"],
+		["Cyclops", "Tool", "Lightning"],
+		["City", "Forest", "Park"],
+		["City", "Garden", "Park"],
+		["City", "Grass", "Park"],
+		["City", "Field", "Park"],
+		["Village", "Forest", "Park"],
+		["Village", "Garden", "Park"],
+		["Village", "Grass", "Park"],
+		["Village", "Field", "Park"],
+		["Gun", "Electricity", "Stun gun"],
+		["Gun", "Wire", "Stun gun"],
+		["Gun", "Energy", "Stun gun"],
+		["Bow", "Electricity", "Stun gun"],
+		["Bow", "Energy", "Stun gun"],
+		["Life", "Land", "Animal"],
+		["Life", "Forest", "Animal"],
+		["Life", "Mountain", "Animal"],
+		["Life", "Mountain range", "Animal"],
+		["Life", "Beach", "Animal"],
+		["Life", "Desert", "Animal"],
+		["Sky", "Night", "Darkness"],
+		["Sky", "Twilight", "Darkness"],
+		["Day", "Night", "Dawn"],
+		["Time", "Night", "Dawn"],
+		["Time", "Life", "Death"],
+		["Corpse", "Philosophy", "Death"],
+		["Skeleton", "Philosophy", "Death"],
+		["Grave", "Philosophy", "Death"],
+		["Graveyard", "Philosophy", "Death"],
+		["Life", "Rainbow", "Magic"],
+		["Life", "Double rainbow!", "Magic"],
+		["Energy", "Witch", "Magic"],
+		["Energy", "Wizard", "Magic"],
+		["Earth", "Life", "Soil"],
+		["Earth", "Organic matter", "Soil"],
+		["Land", "Life", "Soil"],
+		["Land", "Organic matter", "Soil"],
+		["Space", "Container", "Universe"],
+		["Galaxy cluster", "Galaxy cluster", "Universe"],
+		["Galaxy cluster", "Container", "Universe"],
+		["Primordial soup", "Cosmic egg", "Universe"],
+		["Human", "Gold", "Alchemist"],
+		["Gold", "Philosophy", "Alchemist"],
+		["Ruins", "Human", "Archeologist"],
+		["Ruins", "Science", "Archeologist"],
+		["Human", "Telescope", "Astronomer"],
+		["Mountain", "Car", "Cable car"],
+		["Mountain", "Wire", "Cable car"],
+		["Mountain", "Rope", "Cable car"],
+		["Mountain range", "Car", "Cable car"],
+		["Mountain range", "Wire", "Cable car"],
+		["Mountain range", "Rope", "Cable car"],
+		["Animal", "Human", "Domestication"],
+		["Animal", "Farmer", "Domestication"],
+		["Animal", "Science", "Domestication"],
+		["Farmer", "Science", "Domestication"],
+		["Human", "Fire", "Firefighter"],
+		["Human", "Firetruck", "Firefighter"],
+		["Human", "Fire extinguisher", "Firefighter"],
+		["Human", "Light sword", "Force knight"],
+		["Warrior", "Light sword", "Force knight"],
+		["Knight", "Light sword", "Force knight"],
+		["Human", "Computer", "Hacker"],
+		["Human", "Computer mouse", "Hacker"],
+		["Human", "Glasses", "Hacker"],
+		["Human", "Internet", "Hacker"],
+		["Life", "Death", "Organic matter"],
+		["Life", "Science", "Organic matter"],
+		["Bacteria", "Death", "Organic matter"],
+		["Corpse", "Science", "Organic matter"],
+		["Human", "Canvas", "Painter"],
+		["Human", "Paint", "Painter"],
+		["Human", "Painting", "Painter"],
+		["Human", "Clay", "Potter"],
+		["Human", "Pottery", "Potter"],
+		["Human", "Katana", "Samurai"],
+		["Human", "Telescope", "Science"],
+		["Human", "Microscope", "Science"],
+		["Human", "Universe", "Science"],
+		["Human", "Ski goggles", "Skier"],
+		["Human", "Mountain", "Skier"],
+		["Human", "Mountain range", "Skier"],
+		["Cold", "Sea", "Arctic"],
+		["Cold", "Ocean", "Arctic"],
+		["Bird", "Container", "Birdcage"],
+		["Bird", "Safe", "Birdcage"],
+		["Bird", "Wall", "Birdcage"],
+		["Bird", "Cage", "Birdcage"],
+		["Wolf", "Metal", "Cage"],
+		["Wolf", "Steel", "Cage"],
+		["Wolf", "Wall", "Cage"],
+		["Fox", "Metal", "Cage"],
+		["Fox", "Steel", "Cage"],
+		["Fox", "Wall", "Cage"],
+		["Lion", "Metal", "Cage"],
+		["Lion", "Steel", "Cage"],
+		["Lion", "Wall", "Cage"],
+		["Hamster", "Container", "Cage"],
+		["Hamster", "House", "Cage"],
+		["Hamster", "Wall", "Cage"],
+		["House", "Wolf", "Cave"],
+		["House", "Lion", "Cave"],
+		["House", "Fox", "Cave"],
+		["House", "Bat", "Cave"],
+		["Container", "Wolf", "Cave"],
+		["Container", "Lion", "Cave"],
+		["Container", "Fox", "Cave"],
+		["Container", "Bat", "Cave"],
+		["Air", "Cold", "Chill"],
+		["Human", "Cold", "Chill"],
+		["Human", "Ice", "Chill"],
+		["House", "Firefighter", "Firestation"],
+		["House", "Firetruck", "Firestation"],
+		["Firefighter", "Land", "Firestation"],
+		["Firefighter", "Village", "Firestation"],
+		["Firefighter", "City", "Firestation"],
+		["Corpse", "Legend", "Frankenstein's monster"],
+		["Corpse", "Lightning", "Frankenstein's monster"],
+		["Corpse", "Electricity", "Frankenstein's monster"],
+		["Corpse", "Story", "Frankenstein's monster"],
+		["Zombie", "Electricity", "Frankenstein's monster"],
+		["Zombie", "Lightning", "Frankenstein's monster"],
+		["Monster", "Story", "Frankenstein's monster"],
+		["Monster", "Corpse", "Frankenstein's monster"],
+		["Air", "Idea", "Gas"],
+		["Air", "Science", "Gas"],
+		["Energy", "Liquid", "Gas"],
+		["Glass", "Tool", "Lens"],
+		["Glass", "Engineer", "Lens"],
+		["Water", "Science", "Liquid"],
+		["Water", "Idea", "Liquid"],
+		["Energy", "Solid", "Liquid"],
+		["Tool", "Wheel", "Machine"],
+		["Tool", "Tool", "Machine"],
+		["Tool", "Chain", "Machine"],
+		["Tool", "Engineer", "Machine"],
+		["Boiler", "Wheel", "Machine"],
+		["Boiler", "Tool", "Machine"],
+		["Boiler", "Chain", "Machine"],
+		["Lava", "Science", "Magma"],
+		["Volcano", "Science", "Magma"],
+		["Organic matter", "Stone", "Mineral"],
+		["Organic matter", "Rock", "Mineral"],
+		["Organic matter", "Earth", "Mineral"],
+		["Organic matter", "Boulder", "Mineral"],
+		["Organic matter", "Hill", "Mineral"],
+		["Organic matter", "Mountain", "Mineral"],
+		["Wind", "Science", "Motion"],
+		["Wind", "Idea", "Motion"],
+		["Wind", "Philosophy", "Motion"],
+		["Tornado", "Science", "Motion"],
+		["Tornado", "Philosophy", "Motion"],
+		["Stream", "Science", "Motion"],
+		["Stream", "Philosophy", "Motion"],
+		["River", "Science", "Motion"],
+		["River", "Philosophy", "Motion"],
+		["Human", "Story", "Philosophy"],
+		["Human", "Idea", "Philosophy"],
+		["Egg", "Chicken", "Philosophy"],
+		["Plant", "Dust", "Pollen"],
+		["Plant", "Wind", "Pollen"],
+		["Flower", "Dust", "Pollen"],
+		["Flower", "Wind", "Pollen"],
+		["Plant", "Pond", "Reed"],
+		["Plant", "Puddle", "Reed"],
+		["Plant", "Swamp", "Reed"],
+		["Plant", "River", "Reed"],
+		["Grass", "Pond", "Reed"],
+		["Grass", "Puddle", "Reed"],
+		["Grass", "Swamp", "Reed"],
+		["Grass", "River", "Reed"],
+		["Egg", "Fish", "Roe"],
+		["Egg", "Water", "Roe"],
+		["Egg", "Ocean", "Roe"],
+		["Egg", "Sea", "Roe"],
+		["Egg", "Lake", "Roe"],
+		["Egg", "Flying fish", "Roe"],
+		["Earth", "Idea", "Solid"],
+		["Earth", "Science", "Solid"],
+		["Light", "Machine", "Spotlight"],
+		["Light", "Metal", "Spotlight"],
+		["Light", "Steel", "Spotlight"],
+		["Tool", "Container", "Toolbox"],
+		["Tool", "Safe", "Toolbox"],
+		["Tool", "Box", "Toolbox"],
+		["Hammer", "Container", "Toolbox"],
+		["Hammer", "Box", "Toolbox"],
+		["Ruler", "Container", "Toolbox"],
+		["Ruler", "Box", "Toolbox"],
+		["Steel wool", "Container", "Toolbox"],
+		["Steel wool", "Box", "Toolbox"],
+		["Chain", "Box", "Toolbox"],
+		["Chain", "Container", "Toolbox"],
+		["Wind", "Surfer", "Windsurfer"],
+		["Container", "Electricity", "Battery"],
+		["Container", "Energy", "Battery"],
+		["Electricity", "Mineral", "Battery"],
+		["Electricity", "Ore", "Battery"],
+		["Universe", "Philosophy", "Big"],
+		["Galaxy", "Philosophy", "Big"],
+		["Galaxy cluster", "Philosophy", "Big"],
+		["Solar system", "Philosophy", "Big"],
+		["Sun", "Philosophy", "Big"],
+		["Planet", "Philosophy", "Big"],
+		["Chicken", "House", "Chicken coop"],
+		["Chicken", "Wall", "Chicken coop"],
+		["Chicken", "Barn", "Chicken coop"],
+		["Chicken", "Container", "Chicken coop"],
+		["Cockatrice", "House", "Chicken coop"],
+		["Cockatrice", "Barn", "Chicken coop"],
+		["Cockatrice", "Container", "Chicken coop"],
+		["Petroleum", "Machine", "Combustion engine"],
+		["Petroleum", "Wheel", "Combustion engine"],
+		["Petroleum", "Steam engine", "Combustion engine"],
+		["Explosion", "Machine", "Combustion engine"],
+		["Explosion", "Steam engine", "Combustion engine"],
+		["Philosophy", "Safe", "Container"],
+		["Philosophy", "Pottery", "Container"],
+		["Philosophy", "House", "Container"],
+		["Philosophy", "Box", "Container"],
+		["Philosophy", "Bottle", "Container"],
+		["Philosophy", "Bucket", "Container"],
+		["Human", "Fruit", "Cook"],
+		["Human", "Vegetable", "Cook"],
+		["Human", "Campfire", "Cook"],
+		["Human", "Nuts", "Cook"],
+		["Tree", "Sea", "Coral"],
+		["Tree", "Ocean", "Coral"],
+		["Fossil", "Sea", "Coral"],
+		["Fossil", "Ocean", "Coral"],
+		["Bone", "Sea", "Coral"],
+		["Bone", "Ocean", "Coral"],
+		["Dinosaur", "City", "Kaiju"],
+		["Dinosaur", "Skyscraper", "Kaiju"],
+		["Dinosaur", "Legend", "Kaiju"],
+		["Dinosaur", "Story", "Kaiju"],
+		["Monster", "City", "Kaiju"],
+		["Monster", "Skyscraper", "Kaiju"],
+		["Grass", "House", "Lawn"],
+		["Grass", "Container", "Lawn"],
+		["Grass", "Lawn mower", "Lawn"],
+		["Field", "Lawn mower", "Lawn"],
+		["Story", "Time", "Legend"],
+		["Story", "Story", "Legend"],
+		["Story", "Big", "Legend"],
+		["Story", "Fairy tale", "Legend"],
+		["Fairy tale", "Time", "Legend"],
+		["Fairy tale", "Big", "Legend"],
+		["Angler", "Rope", "Net"],
+		["Fishing rod", "Rope", "Net"],
+		["Fish", "Rope", "Net"],
+		["Swordfish", "Rope", "Net"],
+		["Flying fish", "Rope", "Net"],
+		["Tree", "Farmer", "Nuts"],
+		["Tree", "Field", "Nuts"],
+		["Tree", "Domestication", "Nuts"],
+		["Hammer", "Boulder", "Ore"],
+		["Hammer", "Earth", "Ore"],
+		["Hammer", "Rock", "Ore"],
+		["Hammer", "Stone", "Ore"],
+		["Hammer", "Hill", "Ore"],
+		["Hammer", "Mountain", "Ore"],
+		["Human", "Dinosaur", "Paleontologist"],
+		["Human", "Fossil", "Paleontologist"],
+		["Science", "Dinosaur", "Paleontologist"],
+		["Science", "Fossil", "Paleontologist"],
+		["Swamp", "Plant", "Peat"],
+		["Swamp", "Time", "Peat"],
+		["Swamp", "Pressure", "Peat"],
+		["Time", "Grass", "Peat"],
+		["Animal", "Ice", "Polar bear"],
+		["Animal", "Arctic", "Polar bear"],
+		["Earth", "Vegetable", "Potato"],
+		["Metal", "Liquid", "Quicksilver"],
+		["Stream", "Small", "Rivulet"],
+		["Puddle", "Motion", "Rivulet"],
+		["Tree", "Blade", "Sap"],
+		["Pollen", "Plant", "Seed"],
+		["Pollen", "Bee", "Seed"],
+		["Time", "Flower", "Seed"],
+		["Philosophy", "Bacteria", "Small"],
+		["Philosophy", "Oxygen", "Small"],
+		["Philosophy", "Carbon dioxide", "Small"],
+		["Philosophy", "Ozone", "Small"],
+		["Philosophy", "Pebble", "Small"],
+		["Philosophy", "Rivulet", "Small"],
+		["Philosophy", "Ant", "Small"],
+		["Philosophy", "Spider", "Small"],
+		["Philosophy", "Bee", "Small"],
+		["Philosophy", "Scorpion", "Small"],
+		["Philosophy", "Confetti", "Small"],
+		["Philosophy", "Seahorse", "Small"],
+		["Human", "Snowboard", "Snowboarder"],
+		["Pond", "Motion", "Stream"],
+		["Rivulet", "Big", "Stream"],
+		["River", "Small", "Stream"],
+		["Animal", "Container", "Zoo"],
+		["Animal", "Cage", "Zoo"],
+		["Farm", "Ant", "Ant farm"],
+		["Ant", "Jar", "Ant farm"],
+		["Ant", "Glass", "Ant farm"],
+		["Anthill", "Farm", "Ant farm"],
+		["Anthill", "Jar", "Ant farm"],
+		["Ant", "House", "Anthill"],
+		["Ant", "Container", "Anthill"],
+		["Ant", "Hill", "Anthill"],
+		["Ant", "Earth", "Anthill"],
+		["Ant", "Land", "Anthill"],
+		["Ant", "Soil", "Anthill"],
+		["Wood", "Bullet", "Arrow"],
+		["Wood", "Bow", "Arrow"],
+		["Big", "Birdcage", "Aviary"],
+		["Human", "Beehive", "Beekeeper"],
+		["Human", "Bee", "Beekeeper"],
+		["Farmer", "Beehive", "Beekeeper"],
+		["Farmer", "Bee", "Beekeeper"],
+		["Blood", "Container", "Blood bag"],
+		["Blood", "Sack", "Blood bag"],
+		["Blood", "Bottle", "Blood bag"],
+		["Container", "Milk", "Bottle"],
+		["Container", "Water", "Bottle"],
+		["Container", "Coconut milk", "Bottle"],
+		["Container", "Juice", "Bottle"],
+		["Container", "Oil", "Bottle"],
+		["Container", "Alcohol", "Bottle"],
+		["Container", "Wine", "Bottle"],
+		["Container", "Beer", "Bottle"],
+		["Container", "Chocolate milk", "Bottle"],
+		["Container", "Soda", "Bottle"],
+		["Container", "Perfume", "Bottle"],
+		["Container", "Liquid", "Bottle"],
+		["Big", "Rock", "Boulder"],
+		["Big", "Stone", "Boulder"],
+		["Small", "Hill", "Boulder"],
+		["Rock", "Stone", "Boulder"],
+		["Rock", "Rock", "Boulder"],
+		["Rock", "Earth", "Boulder"],
+		["Wood", "Rope", "Bow"],
+		["Wood", "Wire", "Bow"],
+		["Tool", "Elf", "Bow"],
+		["Tool", "Cupid", "Bow"],
+		["Container", "Wood", "Bucket"],
+		["Container", "Yogurt", "Bucket"],
+		["Container", "Paint", "Bucket"],
+		["Bottle", "River", "Bucket"],
+		["Bottle", "Paint", "Bucket"],
+		["Chicken wing", "Container", "Bucket"],
+		["Chicken wing", "Box", "Bucket"],
+		["Butterfly", "Net", "Butterfly net"],
+		["Bee", "Net", "Butterfly net"],
+		["Container", "Broom", "Closet"],
+		["Container", "Toolbox", "Closet"],
+		["Container", "Umbrella", "Closet"],
+		["Container", "Robot vacuum", "Closet"],
+		["Container", "Vacuum cleaner", "Closet"],
+		["Wood", "Cook", "Cutting board"],
+		["Car", "House", "Garage"],
+		["Car", "Container", "Garage"],
+		["Car", "Wall", "Garage"],
+		["Car", "Barn", "Garage"],
+		["Ambulance", "House", "Garage"],
+		["Ambulance", "Container", "Garage"],
+		["Ambulance", "Wall", "Garage"],
+		["Ambulance", "Barn", "Garage"],
+		["Motorcycle", "House", "Garage"],
+		["Motorcycle", "Container", "Garage"],
+		["Motorcycle", "Wall", "Garage"],
+		["Motorcycle", "Barn", "Garage"],
+		["Bus", "House", "Garage"],
+		["Bus", "Container", "Garage"],
+		["Bus", "Wall", "Garage"],
+		["Bus", "Barn", "Garage"],
+		["Sleigh", "House", "Garage"],
+		["Sleigh", "Container", "Garage"],
+		["Sleigh", "Wall", "Garage"],
+		["Sleigh", "Barn", "Garage"],
+		["Electric car", "House", "Garage"],
+		["Electric car", "Container", "Garage"],
+		["Electric car", "Wall", "Garage"],
+		["Electric car", "Barn", "Garage"],
+		["Snowmobile", "House", "Garage"],
+		["Snowmobile", "Container", "Garage"],
+		["Snowmobile", "Wall", "Garage"],
+		["Snowmobile", "Barn", "Garage"],
+		["Tractor", "House", "Garage"],
+		["Tractor", "Container", "Garage"],
+		["Tractor", "Wall", "Garage"],
+		["Tractor", "Barn", "Garage"],
+		["Rv", "House", "Garage"],
+		["Rv", "Container", "Garage"],
+		["Rv", "Wall", "Garage"],
+		["Rv", "Barn", "Garage"],
+		["Ice cream truck", "House", "Garage"],
+		["Ice cream truck", "Container", "Garage"],
+		["Ice cream truck", "Wall", "Garage"],
+		["Ice cream truck", "Barn", "Garage"],
+		["Wind", "Small", "Gust"],
+		["Air", "Small", "Gust"],
+		["Big", "Boulder", "Hill"],
+		["Earth", "Boulder", "Hill"],
+		["Stone", "Boulder", "Hill"],
+		["Boulder", "Boulder", "Hill"],
+		["Mountain", "Small", "Hill"],
+		["Ice", "Statue", "Ice sculpture"],
+		["Blade", "Cook", "Knife"],
+		["Sword", "Cook", "Knife"],
+		["Computer", "Small", "Laptop"],
+		["Small", "Alchemist", "Little alchemy (element)"],
+		["Sap", "Heat", "Maple syrup"],
+		["Sap", "Sugar", "Maple syrup"],
+		["Moon", "Car", "Moon rover"],
+		["Moon", "Electric car", "Moon rover"],
+		["Nuts", "Butter", "Peanut butter"],
+		["Nuts", "Pressure", "Peanut butter"],
+		["Small", "Earth", "Pebble"],
+		["Small", "Stone", "Pebble"],
+		["Small", "Rock", "Pebble"],
+		["Rain", "Forest", "Rainforest"],
+		["House", "Cook", "Restaurant"],
+		["Container", "Flour", "Sack"],
+		["Container", "Salt", "Sack"],
+		["Container", "Letter", "Sack"],
+		["Container", "Air", "Scuba tank"],
+		["Container", "Atmosphere", "Scuba tank"],
+		["Container", "Oxygen", "Scuba tank"],
+		["Tool", "Gardener", "Shovel"],
+		["Wheat", "Container", "Silo"],
+		["Wheat", "House", "Silo"],
+		["Wheat", "Barn", "Silo"],
+		["Wheat", "Wall", "Silo"],
+		["Wheat", "Farm", "Silo"],
+		["Wheat", "Safe", "Silo"],
+		["Wheat", "Bank", "Silo"],
+		["Human", "Sewing machine", "Tailor"],
+		["Human", "Needle", "Tailor"],
+		["Human", "Thread", "Tailor"],
+		["Quicksilver", "Glass", "Thermometer"],
+		["Quicksilver", "Tool", "Thermometer"],
+		["Quicksilver", "Engineer", "Thermometer"],
+		["Safe", "Big", "Vault"],
+		["Fabric", "Cook", "Apron"],
+		["Fabric", "Baker", "Apron"],
+		["Container", "Pizza", "Box"],
+		["Container", "Pencil", "Box"],
+		["Container", "Cereal", "Box"],
+		["Container", "Cookie", "Box"],
+		["Container", "Donut", "Box"],
+		["Container", "Cake", "Box"],
+		["Container", "Crayon", "Box"],
+		["Fabric", "Paint", "Canvas"],
+		["Container", "Smoothie", "Cup"],
+		["Container", "Tea", "Cup"],
+		["Container", "Milk shake", "Cup"],
+		["Bottle", "Smoothie", "Cup"],
+		["Bottle", "Tea", "Cup"],
+		["Bottle", "Milk shake", "Cup"],
+		["Scuba tank", "Human", "Diver"],
+		["Scuba tank", "Swimmer", "Diver"],
+		["Scuba tank", "Sea", "Diver"],
+		["Scuba tank", "Ocean", "Diver"],
+		["Scuba tank", "Lake", "Diver"],
+		["Shovel", "Big", "Excavator"],
+		["Shovel", "Car", "Excavator"],
+		["Pitchfork", "Small", "Fork"],
+		["Animal", "Needle", "Hedgehog"],
+		["Mouse", "Needle", "Hedgehog"],
+		["Rat", "Needle", "Hedgehog"],
+		["Jam", "Container", "Jar"],
+		["Jam", "Bottle", "Jar"],
+		["Jam", "Glass", "Jar"],
+		["Jam", "Bucket", "Jar"],
+		["Human", "Flute", "Musician"],
+		["Human", "Music", "Musician"],
+		["Human", "Sheet music", "Musician"],
+		["Human", "Drum", "Musician"],
+		["Human", "Pan flute", "Musician"],
+		["Flute", "Flute", "Pan flute"],
+		["Robot", "Vacuum cleaner", "Robot vacuum"],
+		["Robot", "Broom", "Robot vacuum"],
+		["Computer", "Vacuum cleaner", "Robot vacuum"],
+		["Computer", "Broom", "Robot vacuum"],
+		["Pebble", "Pebble", "Rock"],
+		["Pebble", "Big", "Rock"],
+		["Boulder", "Small", "Rock"],
+		["Cart", "Snow", "Sleigh"],
+		["Cart", "Ice", "Sleigh"],
+		["Cart", "Arctic", "Sleigh"],
+		["Cart", "Antarctica", "Sleigh"],
+		["Wagon", "Snow", "Sleigh"],
+		["Wagon", "Ice", "Sleigh"],
+		["Wagon", "Arctic", "Sleigh"],
+		["Wagon", "Antarctica", "Sleigh"],
+		["Shovel", "Small", "Spoon"],
+		["Doctor", "Needle", "Syringe"],
+		["Tool", "Needle", "Syringe"],
+		["Laptop", "Small", "Tablet"],
+		["Train", "Container", "Trainyard"],
+		["Train", "House", "Trainyard"],
+		["Train", "Wall", "Trainyard"],
+		["Train", "Garage", "Trainyard"],
+		["Rainforest", "Rope", "Vine"],
+		["Rainforest", "Thread", "Vine"],
+		["Rainforest", "Wire", "Vine"],
+		["Human", "Book", "Writer"],
+		["Human", "Pencil", "Writer"],
+		["Wine", "Container", "Barrel"],
+		["Wine", "Wood", "Barrel"],
+		["Tent", "Big", "Circus"],
+		["Tent", "Animal", "Circus"],
+		["Blade", "Dough", "Cookie cutter"],
+		["Blade", "Cookie dough", "Cookie cutter"],
+		["Chocolate milk", "Heat", "Hot chocolate"],
+		["Chocolate", "Heat", "Hot chocolate"],
+		["Human", "Library", "Librarian"],
+		["Car", "Letter", "Mail truck"],
+		["Car", "Mailman", "Mail truck"],
+		["Car", "Post office", "Mail truck"],
+		["Letter", "Box", "Mailbox"],
+		["Letter", "Metal", "Mailbox"],
+		["Letter", "Steel", "Mailbox"],
+		["Letter", "Wood", "Mailbox"],
+		["Mailman", "Box", "Mailbox"],
+		["Mailman", "Metal", "Mailbox"],
+		["Mailman", "Steel", "Mailbox"],
+		["Mailman", "Wood", "Mailbox"],
+		["Canvas", "Paint", "Painting"],
+		["Canvas", "Painter", "Painting"],
+		["Cup", "Paper", "Paper cup"],
+		["Kite", "Big", "Paraglider"],
+		["Mailman", "House", "Post office"],
+		["Mailman", "Wall", "Post office"],
+		["Mailman", "Container", "Post office"],
+		["Mailman", "Letter", "Post office"],
+		["Letter", "Letter", "Post office"],
+		["Letter", "House", "Post office"],
+		["Letter", "Wall", "Post office"],
+		["Small", "Tablet", "Smartphone"],
+		["Paper cup", "Wire", "String phone"],
+		["Paper cup", "Thread", "String phone"],
+		["Cup", "Wire", "String phone"],
+		["Cup", "Thread", "String phone"]
+	]
+};
 const form = document.getElementById("combine-form");
 const firstSelect = document.getElementById("first-element");
 const secondSelect = document.getElementById("second-element");
@@ -1652,16 +2514,37 @@ const copySaveButton = document.getElementById("copy-save-button");
 const importSaveButton = document.getElementById("import-save-button");
 const clearSaveButton = document.getElementById("clear-save-button");
 const saveDataInput = document.getElementById("save-data-input");
+
 const SAVE_KEY = "alchemist-save-v1";
 const SAVE_INTERVAL_MS = 2000;
 
-function toCanonicalName(name) {
-	const normalized = name.toLowerCase();
-	return elementNameByLower.get(normalized) || name;
+const elementNameByLower = new Map();
+for (const element of STAGE_ONE.elements) {
+	elementNameByLower.set(element.toLowerCase(), element);
+}
+for (const element of STAGE_TWO.elements) {
+	const key = element.toLowerCase();
+	if (!elementNameByLower.has(key)) {
+		elementNameByLower.set(key, element);
+	}
 }
 
-function buildRecipeIndex(recipes) {
-	const index = new Map();
+const stageOneElementSet = new Set(STAGE_ONE.elements.map((name) => toCanonicalName(name)));
+let stageTwoUnlocked = false;
+let activeElementSet = new Set(stageOneElementSet);
+let recipeIndex = new Map();
+const unlocked = new Set(STAGE_ONE.baseElements.map((name) => toCanonicalName(name)));
+
+function toCanonicalName(name) {
+	const normalized = String(name).toLowerCase();
+	return elementNameByLower.get(normalized) || String(name);
+}
+
+function toRecipeKey(first, second) {
+	return [first.toLowerCase(), second.toLowerCase()].sort().join("|");
+}
+
+function addRecipesToIndex(recipes, index) {
 	for (const recipe of recipes) {
 		const first = toCanonicalName(recipe[0]);
 		const second = toCanonicalName(recipe[1]);
@@ -1673,20 +2556,48 @@ function buildRecipeIndex(recipes) {
 		}
 		index.set(key, results);
 	}
-	return index;
 }
 
-function toRecipeKey(first, second) {
-	return [first.toLowerCase(), second.toLowerCase()].sort().join("|");
+function rebuildActiveData() {
+	activeElementSet = new Set(stageOneElementSet);
+	if (stageTwoUnlocked) {
+		for (const name of STAGE_TWO.elements) {
+			activeElementSet.add(toCanonicalName(name));
+		}
+	}
+	recipeIndex = new Map();
+	addRecipesToIndex(STAGE_ONE.recipes, recipeIndex);
+	if (stageTwoUnlocked) {
+		addRecipesToIndex(STAGE_TWO.recipes, recipeIndex);
+	}
+}
+
+function isStageOneComplete() {
+	for (const element of stageOneElementSet) {
+		if (!unlocked.has(element)) {
+			return false;
+		}
+	}
+	return true;
+}
+
+function maybeUnlockStageTwo() {
+	if (stageTwoUnlocked || !isStageOneComplete()) {
+		return;
+	}
+	stageTwoUnlocked = true;
+	for (const base of STAGE_TWO.baseElements) {
+		unlocked.add(toCanonicalName(base));
+	}
+	rebuildActiveData();
+	resultText.textContent = "Stage 2 unlocked! Little Alchemy 2 combinations are now available.";
 }
 
 function populateElementOptions() {
 	const sorted = Array.from(unlocked).sort((a, b) => a.localeCompare(b));
 	const firstValue = firstSelect.value;
 	const secondValue = secondSelect.value;
-	const html = sorted.map((element) => {
-		return `<option value=\"${element}\">${element}</option>`;
-	}).join("");
+	const html = sorted.map((element) => `<option value=\"${element}\">${element}</option>`).join("");
 	firstSelect.innerHTML = html;
 	secondSelect.innerHTML = html;
 	if (firstValue && unlocked.has(firstValue)) {
@@ -1708,6 +2619,9 @@ function combineSelectedElements() {
 	}
 	const newlyUnlocked = [];
 	for (const result of results) {
+		if (!activeElementSet.has(result)) {
+			continue;
+		}
 		if (unlocked.has(result)) {
 			continue;
 		}
@@ -1718,21 +2632,25 @@ function combineSelectedElements() {
 		resultText.textContent = `already unlocked ${results.join(", ")}.`;
 		return;
 	}
+	resultText.textContent = `Unlocked ${newlyUnlocked.join(", ")}!`;
+	maybeUnlockStageTwo();
 	populateElementOptions();
 	renderInventory();
-	resultText.textContent = `Unlocked ${newlyUnlocked.join(", ")}!`;
+	saveDataInput.value = getEncodedSavePayload();
+	saveGame();
 }
 
 function renderInventory() {
-	const total = DATA.elements.length;
-	const count = unlocked.size;
+	const total = activeElementSet.size;
+	const count = Array.from(unlocked).filter((name) => activeElementSet.has(name)).length;
 	const percent = total === 0 ? 0 : (count / total) * 100;
-	totalCount.textContent = `${count}/${total} elements unlocked (${percent.toFixed(1)}%)`;
+	totalCount.textContent = `${count}/${total} elements unlocked (${percent.toFixed(1)}%)`; 
 }
 
 function getSavePayload() {
 	return {
-		version: 1,
+		version: 2,
+		stageTwoUnlocked,
 		unlocked: Array.from(unlocked).sort((a, b) => a.localeCompare(b))
 	};
 }
@@ -1763,18 +2681,21 @@ function applySavePayload(payload) {
 	if (!payload || !Array.isArray(payload.unlocked)) {
 		return false;
 	}
+	stageTwoUnlocked = Boolean(payload.stageTwoUnlocked);
+	rebuildActiveData();
 	unlocked.clear();
 	for (const item of payload.unlocked) {
-		const canonical = toCanonicalName(String(item));
-		if (elementNameByLower.has(canonical.toLowerCase())) {
+		const canonical = toCanonicalName(item);
+		if (activeElementSet.has(canonical)) {
 			unlocked.add(canonical);
 		}
 	}
 	if (unlocked.size === 0) {
-		for (const base of DATA.baseElements) {
+		for (const base of STAGE_ONE.baseElements) {
 			unlocked.add(toCanonicalName(base));
 		}
 	}
+	maybeUnlockStageTwo();
 	return true;
 }
 
@@ -1793,9 +2714,7 @@ function loadGame() {
 		}
 		const raw = decodeBase64(encoded);
 		const parsed = JSON.parse(raw);
-		if (!applySavePayload(parsed)) {
-			return;
-		}
+		applySavePayload(parsed);
 	} catch (error) {
 	}
 }
@@ -1820,8 +2739,7 @@ function importSaveData() {
 	try {
 		const raw = decodeBase64(encoded);
 		const parsed = JSON.parse(raw);
-		const ok = applySavePayload(parsed);
-		if (!ok) {
+		if (!applySavePayload(parsed)) {
 			resultText.textContent = "could not import save data.";
 			return;
 		}
@@ -1835,8 +2753,10 @@ function importSaveData() {
 }
 
 function clearSaveData() {
+	stageTwoUnlocked = false;
+	rebuildActiveData();
 	unlocked.clear();
-	for (const base of DATA.baseElements) {
+	for (const base of STAGE_ONE.baseElements) {
 		unlocked.add(toCanonicalName(base));
 	}
 	saveDataInput.value = "";
@@ -1846,7 +2766,9 @@ function clearSaveData() {
 	resultText.textContent = "save data cleared.";
 }
 
+rebuildActiveData();
 loadGame();
+maybeUnlockStageTwo();
 populateElementOptions();
 renderInventory();
 saveDataInput.value = getEncodedSavePayload();
