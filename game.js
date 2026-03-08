@@ -2750,5 +2750,7 @@ importSaveButton.addEventListener("click", () => {
 });
 
 clearSaveButton.addEventListener("click", () => {
-	clearSaveData();
+	if (confirm("Are you sure you want to clear your save? This cannot be undone.")) {
+		clearSaveData();
+	}
 });
