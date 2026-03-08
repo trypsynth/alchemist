@@ -1953,7 +1953,6 @@ const DATA = {
 		["human", "sewing machine", "Tailor"],
 		["human", "sheet music", "Musician"],
 		["shuriken", "human", "ninja"],
-		["human", "sickness", "sickness"],
 		["human", "ski goggles", "Skier"],
 		["human", "snake", "medusa"],
 		["snow", "human", "snowball"],
