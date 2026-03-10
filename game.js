@@ -2449,6 +2449,7 @@ const firstSelect = document.getElementById("first-element");
 const secondSelect = document.getElementById("second-element");
 const resultText = document.getElementById("result-text");
 const totalCount = document.getElementById("total-count");
+const hintButton = document.getElementById("hint-button");
 const copySaveButton = document.getElementById("copy-save-button");
 const importSaveButton = document.getElementById("import-save-button");
 const clearSaveButton = document.getElementById("clear-save-button");
@@ -2533,6 +2534,38 @@ function combineSelectedElements() {
 	renderInventory();
 	saveDataInput.value = getEncodedSavePayload();
 	saveGame();
+}
+
+function getHint() {
+	const elementScore = new Map();
+	for (const [key, results] of recipeIndex) {
+		if (!results.some((r) => !unlocked.has(r))) continue;
+		const [a, b] = key.split("|");
+		const canonA = toCanonicalName(a);
+		const canonB = toCanonicalName(b);
+		if (!unlocked.has(canonA) || !unlocked.has(canonB)) continue;
+		elementScore.set(canonA, (elementScore.get(canonA) || 0) + 1);
+		elementScore.set(canonB, (elementScore.get(canonB) || 0) + 1);
+	}
+	if (elementScore.size === 0) return null;
+	let best = null;
+	let bestScore = 0;
+	for (const [element, score] of elementScore) {
+		if (score > bestScore) {
+			bestScore = score;
+			best = element;
+		}
+	}
+	return best;
+}
+
+function showHint() {
+	const hint = getHint();
+	if (hint === null) {
+		resultText.textContent = "No hints available — you've discovered all combinations with your current elements!";
+	} else {
+		resultText.textContent = `Try experimenting with ${hint}`;
+	}
 }
 
 function renderInventory() {
@@ -2708,6 +2741,7 @@ function handleSelectEnterKey(event) {
 
 firstSelect.addEventListener("keydown", handleSelectEnterKey);
 secondSelect.addEventListener("keydown", handleSelectEnterKey);
+hintButton.addEventListener("click", showHint);
 copySaveButton.addEventListener("click", copySaveDataToClipboard);
 importSaveButton.addEventListener("click", importSaveData);
 

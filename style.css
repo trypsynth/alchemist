@@ -92,6 +92,20 @@ button:focus-visible {
 	background: var(--accent-strong);
 }
 
+.hint-button {
+	background: var(--panel);
+	color: var(--accent);
+	border-color: var(--accent);
+	margin-bottom: 0.6rem;
+}
+
+.hint-button:hover,
+.hint-button:focus-visible {
+	background: var(--bg);
+	color: var(--accent-strong);
+	border-color: var(--accent-strong);
+}
+
 .option-actions {
 	display: flex;
 	flex-wrap: wrap;
