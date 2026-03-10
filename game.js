@@ -2461,9 +2461,7 @@ const SAVE_FORMAT_PREFIX_V4 = "b4:";
 const DATA_ID = "e776-r1655-4b33bc6d";
 
 const elementNameByLower = new Map();
-for (const element of DATA.elements) {
-	elementNameByLower.set(element.toLowerCase(), element);
-}
+for (const element of DATA.elements) elementNameByLower.set(element.toLowerCase(), element);
 
 const activeElementSet = new Set(DATA.elements.map((name) => toCanonicalName(name)));
 let recipeIndex = new Map();
@@ -2486,9 +2484,7 @@ function rebuildActiveData() {
 		const result = toCanonicalName(recipe[2]);
 		const key = toRecipeKey(first, second);
 		const results = recipeIndex.get(key) || [];
-		if (!results.includes(result)) {
-			results.push(result);
-		}
+		if (!results.includes(result)) results.push(result);
 		recipeIndex.set(key, results);
 	}
 }
@@ -2500,12 +2496,8 @@ function populateElementOptions() {
 	const html = sorted.map((element) => `<option value=\"${element}\">${element}</option>`).join("");
 	firstSelect.innerHTML = html;
 	secondSelect.innerHTML = html;
-	if (firstValue && unlocked.has(firstValue)) {
-		firstSelect.value = firstValue;
-	}
-	if (secondValue && unlocked.has(secondValue)) {
-		secondSelect.value = secondValue;
-	}
+	if (firstValue && unlocked.has(firstValue)) firstSelect.value = firstValue;
+	if (secondValue && unlocked.has(secondValue)) secondSelect.value = secondValue;
 }
 
 function combineSelectedElements() {
@@ -2519,9 +2511,7 @@ function combineSelectedElements() {
 	}
 	const newlyUnlocked = [];
 	for (const result of results) {
-		if (unlocked.has(result)) {
-			continue;
-		}
+		if (unlocked.has(result)) continue;
 		unlocked.add(result);
 		newlyUnlocked.push(result);
 	}
@@ -2561,11 +2551,8 @@ function getHint() {
 
 function showHint() {
 	const hint = getHint();
-	if (hint === null) {
-		resultText.textContent = "No hints available, you've discovered all combinations with your current elements!";
-	} else {
-		resultText.textContent = `Try experimenting with ${hint}`;
-	}
+	if (hint === null) resultText.textContent = "No hints available, you've discovered all combinations with your current elements!";
+	else resultText.textContent = `Try experimenting with ${hint}`;
 }
 
 function renderInventory() {
@@ -2708,9 +2695,7 @@ function importSaveData() {
 
 function clearSaveData() {
 	unlocked.clear();
-	for (const element of DATA.baseElements) {
-		unlocked.add(toCanonicalName(element));
-	}
+	for (const element of DATA.baseElements) unlocked.add(toCanonicalName(element));
 	saveDataInput.value = "";
 	localStorage.removeItem(SAVE_KEY);
 	populateElementOptions();
@@ -2732,9 +2717,7 @@ form.addEventListener("submit", (event) => {
 });
 
 function handleSelectEnterKey(event) {
-	if (event.key !== "Enter") {
-		return;
-	}
+	if (event.key !== "Enter") return;
 	event.preventDefault();
 	combineSelectedElements();
 }
