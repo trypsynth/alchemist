@@ -2562,7 +2562,7 @@ function getHint() {
 function showHint() {
 	const hint = getHint();
 	if (hint === null) {
-		resultText.textContent = "No hints available — you've discovered all combinations with your current elements!";
+		resultText.textContent = "No hints available, you've discovered all combinations with your current elements!";
 	} else {
 		resultText.textContent = `Try experimenting with ${hint}`;
 	}
