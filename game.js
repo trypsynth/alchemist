@@ -2538,15 +2538,16 @@ function getHint() {
 		elementScore.set(canonB, (elementScore.get(canonB) || 0) + 1);
 	}
 	if (elementScore.size === 0) return null;
-	let best = null;
 	let bestScore = 0;
-	for (const [element, score] of elementScore) {
-		if (score > bestScore) {
-			bestScore = score;
-			best = element;
-		}
+	for (const score of elementScore.values()) {
+		if (score > bestScore) bestScore = score;
 	}
-	return best;
+	const threshold = Math.ceil(bestScore * 0.75);
+	const candidates = [];
+	for (const [element, score] of elementScore) {
+		if (score >= threshold) candidates.push(element);
+	}
+	return candidates[Math.floor(Math.random() * candidates.length)];
 }
 
 function showHint() {
