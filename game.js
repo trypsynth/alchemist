@@ -2717,14 +2717,20 @@ form.addEventListener("submit", (event) => {
 	combineSelectedElements();
 });
 
-function handleSelectEnterKey(event) {
-	if (event.key !== "Enter") return;
-	event.preventDefault();
-	combineSelectedElements();
+function handleSelectKeydown(event) {
+	if (event.key === "Enter") {
+		event.preventDefault();
+		combineSelectedElements();
+		return;
+	}
+	if (event.key === "F2") {
+		event.preventDefault();
+		showHint();
+	}
 }
 
-firstSelect.addEventListener("keydown", handleSelectEnterKey);
-secondSelect.addEventListener("keydown", handleSelectEnterKey);
+firstSelect.addEventListener("keydown", handleSelectKeydown);
+secondSelect.addEventListener("keydown", handleSelectKeydown);
 hintButton.addEventListener("click", showHint);
 copySaveButton.addEventListener("click", copySaveDataToClipboard);
 importSaveButton.addEventListener("click", importSaveData);
