@@ -2721,11 +2721,6 @@ function handleSelectKeydown(event) {
 	if (event.key === "Enter") {
 		event.preventDefault();
 		combineSelectedElements();
-		return;
-	}
-	if (event.key === "F2") {
-		event.preventDefault();
-		showHint();
 	}
 }
 
